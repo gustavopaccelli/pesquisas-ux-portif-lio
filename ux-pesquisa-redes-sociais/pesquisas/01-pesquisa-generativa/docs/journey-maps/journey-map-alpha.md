@@ -1,0 +1,15 @@
+# Journey Map simulado — Théo ("Geração Alpha"/adolescente)
+### Episódio mapeado: participação em um trend/desafio visto no TikTok (referência: Dia 1-2 do diário simulado)
+
+> ⚠️ Artefato simulado, construído a partir do episódio registrado no diário simulado desta persona, seguindo o template da seção 4.2 do protocolo. **Nota metodológica**: diferente da jornada da Millennial, a "decisão" final aqui não é uma compra — é uma decisão de participação/identidade, coerente com a lacuna de dados identificada na rodada 2 (não há dado brasileiro de comportamento de compra nessa faixa etária). Isso, em si, já é um achado do estudo: a jornada de decisão da Geração Alpha não segue necessariamente o mesmo formato "funil de compra" usado para adultos.
+
+| Etapa | Ações | Pensamentos | Emoções | Pontos de dor | Oportunidades |
+|---|---|---|---|---|---|
+| **1. Gatilho** | Vê um trend/desafio novo no feed do TikTok, no tempo livre após a escola | "Isso parece legal, dá pra fazer também" | Diversão, animação | — | Plataforma já favorece descoberta orgânica; não há fricção aparente nesta etapa |
+| **2. Exploração** | Não pesquisa mais sobre o trend — decide direto que quer participar | "Não preciso pensar muito, é só tentar" | Empolgação | Decisão pouco refletida — baixa "etapa de avaliação" comparado à jornada da Millennial | — |
+| **3. Avaliação** | Etapa quase ausente: não há comparação com alternativas nem checagem de "vale a pena" | (mínimo) | — | Ausência desta etapa pode indicar que a jornada dessa geração é mais rápida e menos deliberativa do que os frameworks tradicionais de "jornada de decisão" assumem | Compreender esse ciclo mais curto é uma oportunidade de design se algum produto quiser se inserir nesse momento |
+| **4. Decisão** | Grava e posta o próprio vídeo participando do desafio; compartilha no grupo de amigos no WhatsApp | "Quero que meus amigos vejam" | Ansiedade misturada com expectativa | A decisão de "participar" está muito ligada à expectativa de validação social futura, não ao conteúdo do trend em si | — |
+| **5. Pós-decisão** | Checa repetidamente curtidas/comentários ao longo da noite (ver diário, Dia 5) | "Será que gostaram?" | Ansiedade leve entre checagens, alívio com reação positiva | Padrão de checagem compulsiva de validação — ponto de atenção para bem-estar, não só para UX | Nenhuma "oportunidade de produto" deveria explorar ativamente essa ansiedade — ponto ético, não comercial |
+
+### Leitura do journey map
+Diferente da Millennial, cuja jornada tem uma etapa de avaliação robusta (busca por prova social racionalizada antes de decidir), a jornada de Théo é **mais curta e mais emocional**: o gatilho já carrega quase toda a motivação da decisão, e o verdadeiro "momento de tensão" da jornada não é a decisão de participar, e sim a espera pela validação social depois. Isso é consistente com a hipótese H1 (motivo de uso estruturalmente diferente entre gerações) e sugere que H2 (autonomia/risco) pode estar menos ligada a "compra" e mais ligada a bem-estar emocional ligado à validação social — um achado que pode reorientar o foco do relatório final.
