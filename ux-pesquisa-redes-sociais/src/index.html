@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfólio de UX Research — Gustavo Paccelli</title>
+  <link rel="stylesheet" href="design-system/tokens.css">
+  <style>
+    /* Layout e estrutura */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      background: var(--color-canvas);
+      border-bottom: 1px solid var(--color-hairline);
+      z-index: 100;
+    }
+    .top-nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--space-lg);
+      height: 64px;
+    }
+    .top-nav .logo {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-ink);
+      text-decoration: none;
+    }
+
+    /* Hero section */
+    .hero {
+      padding: var(--space-section) var(--space-lg);
+      text-align: center;
+      background: var(--color-canvas);
+    }
+    .hero .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .hero h1 {
+      margin: 0 0 var(--space-md) 0;
+    }
+    .hero p {
+      font-size: 18px;
+      color: var(--color-body);
+      line-height: 1.6;
+      margin: 0 0 var(--space-xl) 0;
+    }
+
+    /* Feature cards section */
+    .feature-cards-section {
+      padding: var(--space-section) var(--space-lg);
+      background: var(--color-canvas);
+    }
+    .feature-cards-section .container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .feature-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: var(--space-lg);
+      margin-top: var(--space-xl);
+    }
+    .feature-card {
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+    }
+    .feature-card-content h2 {
+      margin: 0 0 var(--space-sm) 0;
+      font-size: 24px;
+      font-weight: 600;
+    }
+    .feature-card-content p {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    /* About methodology section */
+    .methodology-section {
+      padding: var(--space-section) var(--space-lg);
+      background: var(--color-surface-soft);
+    }
+    .methodology-section .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .methodology-section h2 {
+      text-align: center;
+      margin-bottom: var(--space-xl);
+    }
+    .methodology-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-lg);
+    }
+    .methodology-card {
+      background: var(--color-canvas);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      border: 1px solid var(--color-hairline);
+    }
+    .methodology-card h3 {
+      margin: 0 0 var(--space-sm) 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-ink);
+    }
+    .methodology-card p {
+      margin: 0;
+      color: var(--color-body);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* CTA section */
+    .cta-section {
+      padding: var(--space-section) var(--space-lg);
+      background: var(--color-primary);
+      color: var(--color-on-primary);
+      text-align: center;
+    }
+    .cta-section .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .cta-section h2 {
+      margin: 0 0 var(--space-md) 0;
+      color: var(--color-on-primary);
+    }
+    .cta-section p {
+      margin: 0 0 var(--space-lg) 0;
+      font-size: 16px;
+      color: var(--color-on-primary);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+    }
+    .footer p {
+      margin: 0 0 var(--space-md) 0;
+      font-size: 14px;
+      color: var(--color-body);
+    }
+    .footer a {
+      color: var(--color-ink);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: var(--space-xl) var(--space-lg);
+      }
+      .hero h1 {
+        font-size: 32px;
+      }
+      .feature-cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="top-nav">
+    <div class="container">
+      <a href="index.html" class="logo">UX Research</a>
+      <div class="nav-links">
+        <a href="#pesquisas">Pesquisas</a>
+        <a href="#metodologia">Metodologia</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1 class="display-md">Portfólio de UX Research</h1>
+      <p>Três pesquisas que exploram comportamento, usabilidade e dados — unindo métodos generativos, avaliativos e quantitativos para gerar insights acionáveis.</p>
+      <a href="#pesquisas" class="btn btn-primary">Explorar Pesquisas</a>
+    </div>
+  </section>
+
+  <!-- Feature Cards -->
+  <section class="feature-cards-section" id="pesquisas">
+    <div class="container">
+      <h2 class="display-sm" style="text-align: center; margin: 0;">Pesquisas</h2>
+      <div class="feature-cards-grid">
+        <!-- Pesquisa 1 -->
+        <a href="case-01-generativa.html" class="feature-card">
+          <div class="feature-card feature-card-pink">
+            <div class="feature-card-content">
+              <h2>Pesquisa Generativa</h2>
+              <p>Comportamento em redes sociais — diferenças geracionais entre Millennials e Geração Alpha.</p>
+            </div>
+          </div>
+        </a>
+
+        <!-- Pesquisa 2 -->
+        <a href="case-02-avaliativa.html" class="feature-card">
+          <div class="feature-card feature-card-teal">
+            <div class="feature-card-content">
+              <h2>Pesquisa Avaliativa</h2>
+              <p>Testes de usabilidade e tree testing na plataforma de vagas fictícia VagaCerta.</p>
+            </div>
+          </div>
+        </a>
+
+        <!-- Pesquisa 3 -->
+        <a href="case-03-quantitativa.html" class="feature-card">
+          <div class="feature-card feature-card-ochre">
+            <div class="feature-card-content">
+              <h2>Pesquisa Quantitativa</h2>
+              <p>Análise de avaliações e SUS no iFood — dados reais de satisfação e confiança.</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Methodology Section -->
+  <section class="methodology-section" id="metodologia">
+    <div class="container">
+      <h2 class="display-sm">Abordagem Metodológica</h2>
+      <div class="methodology-grid">
+        <div class="methodology-card">
+          <h3>Generativo</h3>
+          <p>Exploração de comportamentos e motivações através de artefatos como diários de usuário, journey maps e análise de dados secundários.</p>
+        </div>
+        <div class="methodology-card">
+          <h3>Avaliativo</h3>
+          <p>Validação de conceitos e interfaces através de testes de usabilidade, tree testing e prototipagem interativa.</p>
+        </div>
+        <div class="methodology-card">
+          <h3>Quantitativo</h3>
+          <p>Medição de satisfação, usabilidade e pontos de dor através de análise de dados reais e escalas padronizadas como SUS.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Quer saber mais?</h2>
+      <p>Acesse o repositório completo no GitHub para ver protocolos, dados, documentação completa e artefatos de cada pesquisa.</p>
+      <a href="https://github.com/gustavopaccelli/pesquisas-ux-portif-lio" class="btn btn-on-color" target="_blank">Abrir no GitHub</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer section">
+    <div class="container">
+      <p>Portfólio de UX Research © 2025 — Gustavo Paccelli</p>
+      <p><a href="mailto:gustavopaccelli@gmail.com">gustavopaccelli@gmail.com</a></p>
+    </div>
+  </footer>
+</body>
+</html>
