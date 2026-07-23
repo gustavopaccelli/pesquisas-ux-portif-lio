@@ -7,34 +7,27 @@ on:
   workflow_dispatch:
 
 permissions:
+  contents: write
   pages: write
   id-token: write
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
       - name: Prepare Pages Content
         run: |
-          mkdir -p _pages
-          cp -r ux-pesquisa-redes-sociais/src/* _pages/
-          cp -r ux-pesquisa-redes-sociais/pesquisas _pages/
+          mkdir -p _site
+          cp -r ux-pesquisa-redes-sociais/src/* _site/
+          cp -r ux-pesquisa-redes-sociais/pesquisas _site/
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          path: _pages
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          cname: false
