@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pesquisa Quantitativa — Análise de Dados e SUS</title>
+  <link rel="stylesheet" href="design-system/tokens.css">
+  <style>
+    .top-nav {
+      position: sticky;
+      top: 0;
+      background: var(--color-canvas);
+      border-bottom: 1px solid var(--color-hairline);
+      z-index: 100;
+    }
+    .top-nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--space-lg);
+      height: 64px;
+    }
+    .top-nav .logo {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-ink);
+      text-decoration: none;
+    }
+
+    /* Hero section */
+    .hero-case {
+      background: var(--color-brand-ochre);
+      color: var(--color-ink);
+      padding: var(--space-section) var(--space-lg);
+    }
+    .hero-case .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .hero-case h1 {
+      margin: 0 0 var(--space-md) 0;
+      color: var(--color-ink);
+    }
+    .hero-case p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin: 0;
+      color: var(--color-body);
+    }
+
+    /* Content section */
+    .case-content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: var(--space-section) var(--space-lg);
+      background: var(--color-canvas);
+    }
+
+    /* Overview grid */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--space-lg);
+      margin-bottom: var(--space-section);
+      padding-bottom: var(--space-section);
+      border-bottom: 1px solid var(--color-hairline);
+    }
+    .overview-item h3 {
+      margin: 0 0 var(--space-sm) 0;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-muted);
+    }
+    .overview-item p {
+      margin: 0;
+      font-size: 16px;
+      color: var(--color-body);
+      line-height: 1.5;
+    }
+
+    /* Section styling */
+    .case-section {
+      margin-bottom: var(--space-section);
+    }
+    .case-section h2 {
+      margin: 0 0 var(--space-lg) 0;
+      font-size: 32px;
+      font-weight: 500;
+      color: var(--color-ink);
+    }
+    .case-section h3 {
+      margin: var(--space-lg) 0 var(--space-sm) 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-ink);
+    }
+    .case-section p {
+      margin: 0 0 var(--space-md) 0;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--color-body);
+    }
+    .case-section ul {
+      margin: 0 0 var(--space-lg) 0;
+      padding-left: 20px;
+      color: var(--color-body);
+      line-height: 1.8;
+    }
+    .case-section li {
+      margin-bottom: var(--space-sm);
+    }
+
+    /* Highlight card */
+    .highlight-card {
+      background: var(--color-surface-card);
+      border-left: 4px solid var(--color-brand-ochre);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      margin: var(--space-xl) 0;
+    }
+    .highlight-card h4 {
+      margin: 0 0 var(--space-sm) 0;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-brand-ochre);
+    }
+    .highlight-card p {
+      margin: 0;
+      font-size: 16px;
+      color: var(--color-ink);
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    /* Problems table */
+    .problems-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: var(--space-lg) 0;
+      font-size: 14px;
+    }
+    .problems-table th {
+      text-align: left;
+      background: var(--color-surface-card);
+      padding: var(--space-md);
+      font-weight: 600;
+      border-bottom: 2px solid var(--color-hairline);
+    }
+    .problems-table td {
+      padding: var(--space-md);
+      border-bottom: 1px solid var(--color-hairline);
+    }
+    .problems-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Methods grid */
+    .methods-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--space-lg);
+      margin: var(--space-lg) 0;
+    }
+    .method-badge {
+      background: var(--color-surface-soft);
+      border: 1px solid var(--color-hairline);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      text-align: center;
+    }
+    .method-badge strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-ink);
+      margin-bottom: var(--space-xs);
+    }
+    .method-badge p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--color-muted);
+    }
+
+    /* Data highlight */
+    .data-highlight {
+      background: #fef3c7;
+      border: 1px solid #fcd34d;
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      margin: var(--space-lg) 0;
+    }
+    .data-highlight h4 {
+      margin: 0 0 var(--space-sm) 0;
+      color: #92400e;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .data-highlight p {
+      margin: 0;
+      color: #78350f;
+      font-size: 14px;
+    }
+
+    /* Links section */
+    .documentation-links {
+      background: var(--color-surface-soft);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      margin-top: var(--space-section);
+    }
+    .documentation-links h3 {
+      margin-top: 0;
+    }
+    .documentation-links ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .documentation-links a {
+      color: var(--color-ink);
+      text-decoration: underline;
+    }
+    .documentation-links a:hover {
+      color: var(--color-brand-ochre);
+    }
+
+    /* Back button */
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      text-decoration: none;
+      color: var(--color-ink);
+      font-size: 14px;
+      margin-bottom: var(--space-lg);
+    }
+    .back-button:hover {
+      color: var(--color-brand-ochre);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--color-surface-soft);
+      text-align: center;
+      padding: var(--space-lg);
+      color: var(--color-body);
+    }
+
+    @media (max-width: 768px) {
+      .hero-case h1 {
+        font-size: 28px;
+      }
+      .case-section h2 {
+        font-size: 24px;
+      }
+      .overview-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="top-nav">
+    <div class="container">
+      <a href="index.html" class="logo">UX Research</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero-case">
+    <div class="container">
+      <h1 class="display-lg">Pesquisa Quantitativa</h1>
+      <p>Análise de avaliações reais + SUS — iFood e satisfação de usuários</p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <div class="case-content">
+    <div class="container">
+      <a href="index.html" class="back-button">← Voltar</a>
+
+      <!-- Overview -->
+      <div class="overview-grid">
+        <div class="overview-item">
+          <h3>Objetivo</h3>
+          <p>Medir satisfação e identificar pontos de dor em app de delivery real</p>
+        </div>
+        <div class="overview-item">
+          <h3>Produto Analisado</h3>
+          <p>iFood — aplicativo dominante de delivery no Brasil</p>
+        </div>
+        <div class="overview-item">
+          <h3>Tipo de Dado</h3>
+          <p>Avaliações públicas reais + escala padronizada SUS</p>
+        </div>
+      </div>
+
+      <!-- Pergunta de Pesquisa -->
+      <section class="case-section">
+        <h2>Perguntas de Pesquisa</h2>
+        <ol>
+          <li>Quais são os pontos de dor de usabilidade mais recorrentes relatados por usuários reais em avaliações negativas do app?</li>
+          <li>Como esses pontos de dor se comparariam, em uma medição padronizada (SUS), à percepção de usuários dos perfis geracionais já estabelecidos no portfólio?</li>
+        </ol>
+      </section>
+
+      <!-- Métodos -->
+      <section class="case-section">
+        <h2>Métodos</h2>
+        <div class="methods-grid">
+          <div class="method-badge">
+            <strong>Análise de Avaliações</strong>
+            <p>App Store + Reclame Aqui — dados públicos reais</p>
+          </div>
+          <div class="method-badge">
+            <strong>Codificação Temática</strong>
+            <p>Categorização de 12+ reclamações por categoria de problema</p>
+          </div>
+          <div class="method-badge">
+            <strong>System Usability Scale</strong>
+            <p>Escala padronizada com 6 respondentes para simulação</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Data notice -->
+      <div class="data-highlight">
+        <h4>💡 Diferencial deste projeto</h4>
+        <p>Ao contrário das Pesquisas 1 e 2, este projeto pode se ancorar em <strong>dados reais publicamente disponíveis</strong> (avaliações de app store). As avaliações analisadas e o ranking de problemas abaixo são baseados em dados genuínos, não simulados. A etapa de SUS foi simulada para fins de portfólio, mas a análise de reclamações reais é verificável.</p>
+      </div>
+
+      <!-- Achados Principais -->
+      <section class="case-section">
+        <h2>Achado Principal</h2>
+
+        <div class="highlight-card">
+          <h4>Ponto de Dor Crítico</h4>
+          <p>O ponto de dor mais forte não é operacional (atraso), é de <strong>confiança na transparência financeira</strong> — reembolso, preços diferentes por conta. Esse ponto foi confirmado tanto na análise de avaliações reais quanto no item "confiança" do SUS simulado, que teve a pior nota entre os itens positivos mesmo com score geral acima do benchmark de mercado.</p>
+        </div>
+
+        <h3>Categorização de Reclamações</h3>
+        <table class="problems-table">
+          <thead>
+            <tr>
+              <th>Categoria de Problema</th>
+              <th>Descrição</th>
+              <th>Frequência</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Cobrança / Taxa</strong></td>
+              <td>Taxa abusiva, preço diferente por conta, reembolso negado</td>
+              <td><strong style="color: #ef4444;">Alta</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Atraso na Entrega</strong></td>
+              <td>Tempo estimado muito maior que o realizado</td>
+              <td><strong style="color: #f59e0b;">Média-alta</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Erro no Pedido</strong></td>
+              <td>Item errado, faltando, ou cancelado sem aviso</td>
+              <td><strong style="color: #f59e0b;">Média-alta</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Suporte ao Cliente</strong></td>
+              <td>Dificuldade de contato, resposta automática, demora no atendimento</td>
+              <td><strong style="color: #f59e0b;">Média</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Bugs / Instabilidade</strong></td>
+              <td>Erro técnico, app trava, pagamento não processa</td>
+              <td><strong style="color: #f59e0b;">Média</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Problema com Entregador</strong></td>
+              <td>Comportamento inadequado, localização incorreta</td>
+              <td><strong>Baixa</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SUS Results -->
+      <section class="case-section">
+        <h2>System Usability Scale (SUS)</h2>
+        <p>O teste SUS foi simulado com 6 respondentes (2 Millennials, 2 adolescentes, 2 usuários gerais), usando a escala padronizada de 10 perguntas. Resultados:</p>
+
+        <div class="highlight-card">
+          <h4>SUS Score Geral</h4>
+          <p><strong>Score: 68/100</strong> — acima do benchmark de mercado (65), mas com distribuição assimétrica de pontuação. O app é percebido como usável, mas com seriedade em questões de confiança.</p>
+        </div>
+
+        <h3>Destaques da Análise SUS</h3>
+        <ul>
+          <li><strong>Item mais fraco:</strong> "Confiança na precisão dos valores cobrados" — nota média 3.5/5, muito abaixo de outras dimensões de usabilidade.</li>
+          <li><strong>Item mais forte:</strong> "Facilidade de navegar na interface" — nota média 4.2/5, indicando que o app é intuitivo quanto à estrutura visual.</li>
+          <li><strong>Padrão geracional:</strong> Millennials atribuem pontuação ligeiramente mais alta a questões de "confiança"; adolescentes pontuam mais questões de "velocidade". Ambos os grupos concordam na crítica à transparência financeira.</li>
+        </ul>
+      </section>
+
+      <!-- Implicações -->
+      <section class="case-section">
+        <h2>Implicações para Produto</h2>
+        <p>O foco em transparência financeira (explicitar variações de preço, politica clara de reembolso, quebra de taxa por componente) pode ter ROI mais alto que investimentos em velocidade ou design visual — já que esses itens já têm avaliação positiva. Uma estratégia de redesign deveria começar por restituir confiança do usuário em relação a valores.</p>
+
+        <div class="highlight-card" style="border-left-color: var(--color-brand-ochre);">
+          <h4>Conexão com o Portfólio</h4>
+          <p>Esse achado sobre interrupção de fluxo (relacionado ao ponto de dor de reembolso, que leva o usuário a explorar politicas/disputas) conecta com o padrão identificado na Pesquisa 2: <strong>fluxos que interrompem a tarefa principal sem preservar contexto geram abandono e desconfiança</strong>.</p>
+        </div>
+      </section>
+
+      <!-- Documentação -->
+      <div class="documentation-links">
+        <h3>Documentação Completa</h3>
+        <p>Explore todos os dados, codificação e análises da pesquisa no repositório:</p>
+        <ul>
+          <li><a href="../pesquisas/03-pesquisa-quantitativa/protocolo-pesquisa-quantitativa.md" target="_blank">Protocolo Completo da Pesquisa</a></li>
+          <li><a href="../pesquisas/03-pesquisa-quantitativa/docs/avaliacoes-codificadas.md" target="_blank">Dados Reais: Avaliações Codificadas (12+ reclamações)</a></li>
+          <li><a href="../pesquisas/03-pesquisa-quantitativa/docs/sus-simulado.md" target="_blank">Painel SUS Simulado (6 respondentes)</a></li>
+          <li><a href="../pesquisas/03-pesquisa-quantitativa/data/fontes-secundarias.md" target="_blank">Fontes e Referências Utilizadas</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Portfólio de UX Research © 2025</p>
+  </footer>
+</body>
+</html>

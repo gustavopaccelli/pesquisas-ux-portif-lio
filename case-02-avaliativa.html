@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pesquisa Avaliativa — Teste de Usabilidade e Tree Testing</title>
+  <link rel="stylesheet" href="design-system/tokens.css">
+  <style>
+    .top-nav {
+      position: sticky;
+      top: 0;
+      background: var(--color-canvas);
+      border-bottom: 1px solid var(--color-hairline);
+      z-index: 100;
+    }
+    .top-nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--space-lg);
+      height: 64px;
+    }
+    .top-nav .logo {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-ink);
+      text-decoration: none;
+    }
+
+    /* Hero section */
+    .hero-case {
+      background: var(--color-brand-teal);
+      color: var(--color-on-dark);
+      padding: var(--space-section) var(--space-lg);
+    }
+    .hero-case .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .hero-case h1 {
+      margin: 0 0 var(--space-md) 0;
+      color: var(--color-on-dark);
+    }
+    .hero-case p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin: 0;
+      color: var(--color-on-dark-soft);
+    }
+
+    /* Content section */
+    .case-content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: var(--space-section) var(--space-lg);
+      background: var(--color-canvas);
+    }
+
+    /* Overview grid */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--space-lg);
+      margin-bottom: var(--space-section);
+      padding-bottom: var(--space-section);
+      border-bottom: 1px solid var(--color-hairline);
+    }
+    .overview-item h3 {
+      margin: 0 0 var(--space-sm) 0;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-muted);
+    }
+    .overview-item p {
+      margin: 0;
+      font-size: 16px;
+      color: var(--color-body);
+      line-height: 1.5;
+    }
+
+    /* Section styling */
+    .case-section {
+      margin-bottom: var(--space-section);
+    }
+    .case-section h2 {
+      margin: 0 0 var(--space-lg) 0;
+      font-size: 32px;
+      font-weight: 500;
+      color: var(--color-ink);
+    }
+    .case-section h3 {
+      margin: var(--space-lg) 0 var(--space-sm) 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-ink);
+    }
+    .case-section p {
+      margin: 0 0 var(--space-md) 0;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--color-body);
+    }
+    .case-section ul {
+      margin: 0 0 var(--space-lg) 0;
+      padding-left: 20px;
+      color: var(--color-body);
+      line-height: 1.8;
+    }
+    .case-section li {
+      margin-bottom: var(--space-sm);
+    }
+
+    /* Highlight card */
+    .highlight-card {
+      background: var(--color-surface-card);
+      border-left: 4px solid var(--color-brand-teal);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      margin: var(--space-xl) 0;
+    }
+    .highlight-card h4 {
+      margin: 0 0 var(--space-sm) 0;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-brand-teal);
+    }
+    .highlight-card p {
+      margin: 0;
+      font-size: 16px;
+      color: var(--color-ink);
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    /* Problem table */
+    .problems-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: var(--space-lg) 0;
+      font-size: 14px;
+    }
+    .problems-table th {
+      text-align: left;
+      background: var(--color-surface-card);
+      padding: var(--space-md);
+      font-weight: 600;
+      border-bottom: 2px solid var(--color-hairline);
+    }
+    .problems-table td {
+      padding: var(--space-md);
+      border-bottom: 1px solid var(--color-hairline);
+    }
+    .problems-table tr:last-child td {
+      border-bottom: none;
+    }
+    .severity-alta {
+      color: #ef4444;
+      font-weight: 600;
+    }
+    .severity-media {
+      color: #f59e0b;
+      font-weight: 600;
+    }
+
+    /* Methods grid */
+    .methods-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--space-lg);
+      margin: var(--space-lg) 0;
+    }
+    .method-badge {
+      background: var(--color-surface-soft);
+      border: 1px solid var(--color-hairline);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      text-align: center;
+    }
+    .method-badge strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-ink);
+      margin-bottom: var(--space-xs);
+    }
+    .method-badge p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--color-muted);
+    }
+
+    /* Prototype notice */
+    .prototype-notice {
+      background: #f0f9ff;
+      border: 1px solid #bae6fd;
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      margin: var(--space-lg) 0;
+    }
+    .prototype-notice h4 {
+      margin: 0 0 var(--space-sm) 0;
+      color: #0369a1;
+      font-size: 14px;
+    }
+    .prototype-notice p {
+      margin: 0 0 var(--space-sm) 0;
+      color: #0c4a6e;
+      font-size: 14px;
+    }
+    .prototype-notice a {
+      color: #0369a1;
+      text-decoration: underline;
+    }
+
+    /* Links section */
+    .documentation-links {
+      background: var(--color-surface-soft);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      margin-top: var(--space-section);
+    }
+    .documentation-links h3 {
+      margin-top: 0;
+    }
+    .documentation-links ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .documentation-links a {
+      color: var(--color-ink);
+      text-decoration: underline;
+    }
+    .documentation-links a:hover {
+      color: var(--color-brand-teal);
+    }
+
+    /* Back button */
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      text-decoration: none;
+      color: var(--color-ink);
+      font-size: 14px;
+      margin-bottom: var(--space-lg);
+    }
+    .back-button:hover {
+      color: var(--color-brand-teal);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--color-surface-soft);
+      text-align: center;
+      padding: var(--space-lg);
+      color: var(--color-body);
+    }
+
+    @media (max-width: 768px) {
+      .hero-case h1 {
+        font-size: 28px;
+      }
+      .case-section h2 {
+        font-size: 24px;
+      }
+      .overview-grid {
+        grid-template-columns: 1fr;
+      }
+      .problems-table {
+        font-size: 12px;
+      }
+      .problems-table th,
+      .problems-table td {
+        padding: var(--space-sm);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="top-nav">
+    <div class="container">
+      <a href="index.html" class="logo">UX Research</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero-case">
+    <div class="container">
+      <h1 class="display-lg">Pesquisa Avaliativa</h1>
+      <p>Teste de usabilidade e tree testing — Plataforma de vagas de emprego VagaCerta</p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <div class="case-content">
+    <div class="container">
+      <a href="index.html" class="back-button">← Voltar</a>
+
+      <!-- Overview -->
+      <div class="overview-grid">
+        <div class="overview-item">
+          <h3>Objetivo</h3>
+          <p>Validar fluxo de candidatura e arquitetura de informação com usuários reais</p>
+        </div>
+        <div class="overview-item">
+          <h3>Público</h3>
+          <p>Millennials e adolescentes em contexto de busca de emprego</p>
+        </div>
+        <div class="overview-item">
+          <h3>Produto</h3>
+          <p>VagaCerta — plataforma fictícia de busca de vagas</p>
+        </div>
+      </div>
+
+      <!-- Pergunta de Pesquisa -->
+      <section class="case-section">
+        <h2>Pergunta Central</h2>
+        <p>Um usuário consegue, de forma eficiente e sem erros, executar tarefas-chave de busca e candidatura em uma plataforma de vagas, e localizar categorias em uma arquitetura de informação baseada só em texto (sem design visual)?</p>
+      </section>
+
+      <!-- Métodos -->
+      <section class="case-section">
+        <h2>Métodos</h2>
+        <div class="methods-grid">
+          <div class="method-badge">
+            <strong>Teste de Usabilidade</strong>
+            <p>Moderado com think-aloud, tarefas com métrica de sucesso/erro</p>
+          </div>
+          <div class="method-badge">
+            <strong>Tree Testing</strong>
+            <p>Teste de arquitetura de informação em árvore texto</p>
+          </div>
+          <div class="method-badge">
+            <strong>Prototipagem</strong>
+            <p>Protótipo clicável HTML/CSS, autocontido, sem dependências externas</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Achados Principais -->
+      <section class="case-section">
+        <h2>Achados Principais</h2>
+
+        <table class="problems-table">
+          <thead>
+            <tr>
+              <th style="width: 15%;">Ranking</th>
+              <th style="width: 35%;">Problema</th>
+              <th style="width: 20%;">Severidade</th>
+              <th style="width: 30%;">Método que Revelou</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1</strong></td>
+              <td>Fluxo de candidatura perde o participante ao sair para editar perfil</td>
+              <td><span class="severity-alta">Alta</span></td>
+              <td>Teste de Usabilidade</td>
+            </tr>
+            <tr>
+              <td><strong>2</strong></td>
+              <td>"Jovem Aprendiz" e "Estagiário/Aprendiz" competem semanticamente na árvore de IA</td>
+              <td><span class="severity-media">Média-alta</span></td>
+              <td>Tree Testing</td>
+            </tr>
+            <tr>
+              <td><strong>3</strong></td>
+              <td>Tarefas que exigem combinar duas facetas (área + modalidade) têm baixo sucesso em árvore texto pura</td>
+              <td><span class="severity-media">Média</span></td>
+              <td>Tree Testing</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Key insight -->
+        <div class="highlight-card">
+          <h4>Achado Transversal</h4>
+          <p>Os dois problemas mais sérios afetam ambos os grupos de forma parecida — não são problemas "de adolescente" ou "de Millennial", são problemas de arquitetura/fluxo universais. Isso mostra que nem toda pesquisa precisa confirmar diferença entre públicos para ser valiosa: às vezes o valor está em mostrar que um problema é universal e deve ser priorizado.</p>
+        </div>
+      </section>
+
+      <!-- Prototype Section -->
+      <section class="case-section">
+        <h2>Protótipo Interativo</h2>
+        <p>O protótipo do VagaCerta foi construído como HTML/CSS/JS clicável e funcional, autocontido em um arquivo único para eliminar dependências externas. Os filtros funcionam, o fluxo de candidatura em 3 passos navega de verdade, e o estado vazio aparece quando um filtro não retorna resultado.</p>
+
+        <div class="prototype-notice">
+          <h4>🔍 Explore o protótipo</h4>
+          <p>Veja o protótipo interativo do VagaCerta testado nesta pesquisa:</p>
+          <p><a href="../pesquisas/02-pesquisa-avaliativa/docs/usability-test/prototype/index.html" target="_blank">Abrir protótipo VagaCerta →</a></p>
+          <p style="font-size: 13px; color: #0c4a6e; margin: 0;">O protótipo mantém sua identidade visual original (navy + tangerina + teal), diferente do design system do portfólio — isso é intencional, pois VagaCerta é um produto fictício sendo testado, não a marca do portfólio.</p>
+        </div>
+      </section>
+
+      <!-- Conexão com outras pesquisas -->
+      <section class="case-section">
+        <h2>Conexão com Outras Pesquisas</h2>
+        <p>O achado 1 (perda de contexto ao sair do fluxo principal) tem o mesmo formato do problema de maior severidade encontrado na Pesquisa 3 (análise do iFood): friction em fluxos que interrompem a tarefa principal do usuário sem um caminho claro de retorno. Isso sugere um padrão transversal ao portfólio inteiro:</p>
+        <div class="highlight-card" style="border-left-color: var(--color-brand-teal);">
+          <h4>Padrão Identificado</h4>
+          <p><strong>Produtos que interrompem o fluxo principal do usuário sem preservar contexto de retorno geram abandono</strong> — independentemente do domínio (emprego ou delivery) ou da geração do usuário.</p>
+        </div>
+      </section>
+
+      <!-- Documentação -->
+      <div class="documentation-links">
+        <h3>Documentação Completa</h3>
+        <p>Explore todos os artefatos, resultados e análises da pesquisa no repositório:</p>
+        <ul>
+          <li><a href="../pesquisas/02-pesquisa-avaliativa/protocolo-pesquisa-avaliativa.md" target="_blank">Protocolo Completo da Pesquisa</a></li>
+          <li><a href="../pesquisas/02-pesquisa-avaliativa/docs/usability-test/prototype/index.html" target="_blank">Protótipo Interativo VagaCerta</a></li>
+          <li><a href="../pesquisas/02-pesquisa-avaliativa/docs/usability-test/resultados-simulados.md" target="_blank">Resultados do Teste de Usabilidade</a></li>
+          <li><a href="../pesquisas/02-pesquisa-avaliativa/docs/tree-test/resultados-tree-test.md" target="_blank">Resultados do Tree Testing</a></li>
+          <li><a href="../pesquisas/02-pesquisa-avaliativa/docs/personas/" target="_blank">Personas para este Projeto</a></li>
+          <li><a href="../pesquisas/02-pesquisa-avaliativa/docs/insights/sintese-pesquisa-2.md" target="_blank">Síntese de Insights</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Portfólio de UX Research © 2025</p>
+  </footer>
+</body>
+</html>

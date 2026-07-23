@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VagaCerta — Protótipo de pesquisa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16213E;
+    --ink-soft:#5B6478;
+    --paper:#F4F6F2;
+    --paper-alt:#FFFFFF;
+    --line:#DDE3DC;
+    --accent:#FF7A3D;
+    --accent-dark:#E2632A;
+    --accent-light:#FFE8DA;
+    --teal:#1FA398;
+    --teal-light:#E1F5F2;
+    --danger:#C6493D;
+    --danger-light:#FBE7E4;
+    --radius:16px;
+    --radius-sm:10px;
+    --shadow: 0 1px 2px rgba(22,33,62,.06), 0 8px 24px rgba(22,33,62,.08);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 15% 8%, rgba(255,122,61,.10), transparent 40%),
+      radial-gradient(circle at 85% 92%, rgba(31,163,152,.10), transparent 40%),
+      #ECEFE8;
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:36px 16px 60px;
+  }
+  .lab-header{
+    width:100%;
+    max-width:960px;
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:16px;
+    margin-bottom:22px;
+    flex-wrap:wrap;
+  }
+  .lab-header h1{
+    font-family:'Bricolage Grotesque',sans-serif;
+    font-size:20px;
+    font-weight:700;
+    margin:0;
+    letter-spacing:-.01em;
+  }
+  .lab-header p{
+    margin:2px 0 0;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  .task-pill{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    background:var(--paper-alt);
+    border:1px solid var(--line);
+    padding:6px 10px;
+    border-radius:999px;
+    color:var(--ink-soft);
+  }
+  .stage{
+    display:flex;
+    gap:28px;
+    align-items:flex-start;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+
+  /* ---- Phone frame ---- */
+  .device{
+    width:390px;
+    height:800px;
+    background:var(--ink);
+    border-radius:44px;
+    padding:14px;
+    box-shadow: var(--shadow);
+    position:relative;
+    flex-shrink:0;
+  }
+  .notch{
+    position:absolute;
+    top:14px; left:50%;
+    transform:translateX(-50%);
+    width:120px; height:22px;
+    background:var(--ink);
+    border-bottom-left-radius:14px;
+    border-bottom-right-radius:14px;
+    z-index:5;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .notch::after{
+    content:"";
+    width:44px;height:5px;
+    background:#2A3A63;
+    border-radius:3px;
+  }
+  .screen-viewport{
+    background:var(--paper);
+    width:100%;
+    height:100%;
+    border-radius:30px;
+    overflow:hidden;
+    position:relative;
+  }
+  .screen{
+    position:absolute;
+    inset:0;
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+    padding-bottom:24px;
+    opacity:0;
+    pointer-events:none;
+    transform:translateY(6px);
+    transition:opacity .22s ease, transform .22s ease;
+  }
+  .screen.active{
+    opacity:1;
+    pointer-events:auto;
+    transform:translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .screen{transition:none;}
+  }
+  .screen::-webkit-scrollbar{width:0;}
+
+  /* ---- shared UI ---- */
+  .app-header{
+    padding:44px 20px 14px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .logo{
+    display:flex;align-items:center;gap:8px;
+    font-family:'Bricolage Grotesque',sans-serif;
+    font-weight:700;
+    font-size:19px;
+  }
+  .logo-mark{width:22px;height:22px;flex-shrink:0;}
+  .icon-btn{
+    width:36px;height:36px;
+    border-radius:50%;
+    background:var(--paper-alt);
+    border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+  }
+  .icon-btn svg{width:17px;height:17px;stroke:var(--ink);}
+
+  .search-field{
+    margin:2px 20px 14px;
+    display:flex;align-items:center;gap:10px;
+    background:var(--paper-alt);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:13px 16px;
+  }
+  .search-field svg{width:17px;height:17px;stroke:var(--ink-soft);flex-shrink:0;}
+  .search-field input{
+    border:none;outline:none;background:none;
+    font-family:'Inter';font-size:14.5px;color:var(--ink);
+    width:100%;
+  }
+  .search-field input::placeholder{color:var(--ink-soft);}
+
+  .section-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:var(--ink-soft);
+    padding:0 20px;
+    margin:18px 0 10px;
+  }
+
+  .chip-row{
+    display:flex;gap:8px;flex-wrap:wrap;
+    padding:0 20px;
+  }
+  .chip{
+    font-family:'Inter';font-size:13px;font-weight:600;
+    background:var(--paper-alt);
+    border:1px solid var(--line);
+    color:var(--ink);
+    padding:9px 14px;
+    border-radius:999px;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .chip.spotlight{
+    background:var(--accent-light);
+    border-color:var(--accent);
+    color:var(--accent-dark);
+  }
+  .chip:focus-visible, .icon-btn:focus-visible, button:focus-visible, input:focus-visible, a:focus-visible{
+    outline:2.5px solid var(--teal);
+    outline-offset:2px;
+  }
+
+  .job-card{
+    margin:0 20px 12px;
+    background:var(--paper-alt);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:16px;
+    cursor:pointer;
+    transition:box-shadow .15s ease, transform .15s ease;
+  }
+  .job-card:hover{box-shadow:var(--shadow); transform:translateY(-1px);}
+  .job-card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;}
+  .job-title{font-family:'Bricolage Grotesque';font-weight:700;font-size:15.5px;margin:0 0 2px;}
+  .job-company{font-size:13px;color:var(--ink-soft);margin:0;}
+  .badge{
+    font-family:'IBM Plex Mono';font-size:10.5px;font-weight:600;
+    padding:3px 8px;border-radius:6px;
+    background:var(--teal-light); color:#127268;
+    white-space:nowrap;
+  }
+  .badge.warm{background:var(--accent-light);color:var(--accent-dark);}
+  .job-meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
+  .job-meta span{
+    font-size:11.5px; font-family:'IBM Plex Mono';
+    background:var(--paper); border:1px solid var(--line);
+    padding:4px 8px;border-radius:6px;color:var(--ink-soft);
+  }
+  .job-salary{font-family:'IBM Plex Mono';font-weight:600;font-size:13px;margin-top:10px;}
+
+  .primary-btn{
+    display:block;width:calc(100% - 40px);
+    margin:6px 20px;
+    background:var(--ink);color:#fff;
+    border:none;border-radius:var(--radius-sm);
+    padding:14px;font-family:'Inter';font-weight:600;font-size:14.5px;
+    cursor:pointer;
+  }
+  .primary-btn:hover{background:#0F1730;}
+  .primary-btn.accent{background:var(--accent);}
+  .primary-btn.accent:hover{background:var(--accent-dark);}
+  .secondary-btn{
+    display:block;width:calc(100% - 40px);
+    margin:6px 20px;
+    background:transparent;color:var(--ink);
+    border:1.5px solid var(--line);border-radius:var(--radius-sm);
+    padding:13px;font-family:'Inter';font-weight:600;font-size:14px;
+    cursor:pointer;
+  }
+  .back-row{
+    display:flex;align-items:center;gap:10px;
+    padding:44px 20px 4px;
+  }
+  .back-row .icon-btn{width:32px;height:32px;}
+  .back-row h2{font-family:'Bricolage Grotesque';font-size:16.5px;margin:0;font-weight:700;}
+
+  /* ---- Results / filters ---- */
+  .results-count{padding:0 20px 4px;font-size:12.5px;color:var(--ink-soft);}
+  .filter-toggle-row{padding:0 20px 4px;}
+  .filter-btn{
+    display:inline-flex;align-items:center;gap:6px;
+    font-family:'Inter';font-weight:600;font-size:13px;
+    background:var(--paper-alt); border:1px solid var(--line);
+    padding:9px 13px;border-radius:999px;cursor:pointer;
+  }
+  .filter-panel{
+    margin:10px 20px 6px;
+    background:var(--paper-alt);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:14px 16px 4px;
+    display:none;
+  }
+  .filter-panel.open{display:block;}
+  .filter-group{margin-bottom:14px;}
+  .filter-group h4{
+    font-family:'IBM Plex Mono';font-size:11px;text-transform:uppercase;
+    letter-spacing:.05em;color:var(--ink-soft);margin:0 0 8px;
+  }
+  .filter-opts{display:flex;flex-wrap:wrap;gap:7px;}
+  .filter-opt{
+    font-size:12.5px;font-family:'Inter';font-weight:500;
+    border:1.5px solid var(--line);border-radius:8px;
+    padding:7px 10px;cursor:pointer;background:var(--paper);
+    user-select:none;
+  }
+  .filter-opt.on{
+    background:var(--ink);color:#fff;border-color:var(--ink);
+  }
+  .filter-opt.on.tag-alpha{background:var(--accent);border-color:var(--accent);}
+  .filter-clear{
+    font-family:'Inter';font-size:12.5px;font-weight:600;color:var(--danger);
+    background:none;border:none;cursor:pointer;padding:10px 0 14px;
+  }
+
+  /* ---- Detail ---- */
+  .detail-body{padding:14px 20px 4px;}
+  .detail-title{font-family:'Bricolage Grotesque';font-weight:800;font-size:21px;margin:2px 0 4px;}
+  .detail-company{color:var(--ink-soft);font-size:14px;margin:0 0 14px;}
+  .key-facts{
+    background:var(--paper-alt);border:1px solid var(--line);
+    border-radius:var(--radius);padding:14px 16px;margin-bottom:16px;
+  }
+  .kf-row{display:flex;justify-content:space-between;padding:7px 0;font-size:13.5px;border-top:1px solid var(--line);}
+  .kf-row:first-child{border-top:none;}
+  .kf-label{color:var(--ink-soft);}
+  .kf-value{font-weight:600;text-align:right;}
+  .benefit-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;}
+  .benefit-list span{
+    font-size:11.5px;font-family:'IBM Plex Mono';background:var(--teal-light);
+    color:#127268;padding:4px 8px;border-radius:6px;
+  }
+  .detail-desc h4, .detail-req h4{
+    font-family:'Bricolage Grotesque';font-size:14.5px;margin:16px 0 6px;
+  }
+  .detail-desc p{font-size:13.5px;line-height:1.55;color:var(--ink);margin:0;}
+  .detail-req ul{margin:0;padding-left:18px;font-size:13.5px;line-height:1.7;}
+  .req-flag{
+    display:inline-block;margin-top:8px;
+    background:var(--accent-light);color:var(--accent-dark);
+    font-family:'IBM Plex Mono';font-size:11.5px;font-weight:600;
+    padding:6px 10px;border-radius:8px;
+  }
+  .profile-banner{
+    margin:14px 20px 0;
+    background:var(--danger-light);
+    border:1px solid #F1C6BF;
+    border-radius:var(--radius-sm);
+    padding:12px 14px;
+    font-size:13px;
+    display:flex; justify-content:space-between; align-items:center; gap:10px;
+  }
+  .profile-banner a{color:var(--danger);font-weight:700;text-decoration:underline;cursor:pointer;}
+  .sticky-cta{
+    position:sticky;bottom:0;left:0;right:0;
+    background:linear-gradient(to top, var(--paper) 60%, transparent);
+    padding:16px 0 6px;
+  }
+
+  /* ---- Apply flow ---- */
+  .steps{display:flex;gap:6px;padding:0 20px;margin-bottom:6px;}
+  .step-dot{flex:1;height:4px;border-radius:2px;background:var(--line);}
+  .step-dot.done{background:var(--accent);}
+  .form-row{padding:12px 20px 0;}
+  .form-row label{
+    display:block;font-size:12px;font-weight:600;color:var(--ink-soft);
+    margin-bottom:6px;font-family:'IBM Plex Mono';text-transform:uppercase;letter-spacing:.03em;
+  }
+  .form-static{
+    background:var(--paper-alt);border:1px solid var(--line);border-radius:10px;
+    padding:12px 14px;font-size:14px;
+  }
+  .form-input, select.form-input{
+    width:100%;background:var(--paper-alt);border:1px solid var(--line);
+    border-radius:10px;padding:12px 14px;font-size:14px;font-family:'Inter';color:var(--ink);
+  }
+  .radio-row{display:flex;gap:10px;margin-top:2px;}
+  .radio-opt{
+    flex:1;text-align:center;padding:11px;border:1.5px solid var(--line);
+    border-radius:10px;font-size:13.5px;font-weight:600;cursor:pointer;background:var(--paper-alt);
+  }
+  .radio-opt.sel{border-color:var(--teal);background:var(--teal-light);color:#0F6E65;}
+  .summary-box{
+    margin:14px 20px;background:var(--paper-alt);border:1px solid var(--line);
+    border-radius:var(--radius);padding:14px 16px;font-size:13.5px;
+  }
+  .summary-box .row{display:flex;justify-content:space-between;padding:6px 0;border-top:1px solid var(--line);}
+  .summary-box .row:first-child{border-top:none;}
+
+  /* ---- Success / match motif ---- */
+  .success-wrap{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:90px 30px 20px;
+  }
+  .match-anim{width:104px;height:64px;position:relative;margin-bottom:22px;}
+  .match-piece{position:absolute;top:0;width:52px;height:64px;transition:transform .55s cubic-bezier(.2,.9,.3,1.2);}
+  .match-piece.left{left:0;transform:translateX(-14px);}
+  .match-piece.right{right:0;transform:translateX(14px) scaleX(-1);}
+  .success-wrap.play .match-piece.left{transform:translateX(0);}
+  .success-wrap.play .match-piece.right{transform:translateX(0) scaleX(-1);}
+  .success-wrap h2{font-family:'Bricolage Grotesque';font-size:20px;margin:0 0 8px;}
+  .success-wrap p{font-size:13.5px;color:var(--ink-soft);line-height:1.6;margin:0 0 22px;}
+
+  /* ---- Profile ---- */
+  .avatar{
+    width:64px;height:64px;border-radius:50%;background:var(--teal-light);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Bricolage Grotesque';font-weight:800;font-size:22px;color:#127268;
+    margin:8px auto 4px;
+  }
+  .empty-inline{
+    border:1.5px dashed var(--line); border-radius:var(--radius-sm);
+    padding:14px; font-size:12.5px; color:var(--ink-soft); line-height:1.5;
+    background:var(--paper);
+  }
+  .toast{
+    position:absolute; left:20px; right:20px; bottom:18px;
+    background:var(--ink); color:#fff; padding:12px 16px; border-radius:10px;
+    font-size:13px; font-weight:600; text-align:center;
+    opacity:0; transform:translateY(8px); transition:opacity .2s, transform .2s;
+    pointer-events:none;
+  }
+  .toast.show{opacity:1;transform:translateY(0);}
+
+  /* ---- Empty state ---- */
+  .empty-state{display:flex;flex-direction:column;align-items:center;text-align:center;padding:110px 34px 20px;}
+  .empty-state svg{width:52px;height:52px;stroke:var(--ink-soft);margin-bottom:18px;}
+  .empty-state h2{font-family:'Bricolage Grotesque';font-size:17px;margin:0 0 6px;}
+  .empty-state p{font-size:13px;color:var(--ink-soft);margin:0 0 22px;}
+
+  @media (max-width:460px){
+    .device{width:100%; max-width:390px; height:82vh; min-height:640px;}
+    .stage{gap:16px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="lab-header">
+  <div>
+    <h1>VagaCerta — protótipo clicável</h1>
+    <p>Feito para o roteiro de Teste de Usabilidade e Tree Testing da Pesquisa 2. Navegue clicando, como um participante faria.</p>
+  </div>
+  <div class="task-pill" id="taskLabel">Tela: Home / Busca</div>
+</div>
+
+<div class="stage">
+  <div class="device">
+    <div class="notch"></div>
+    <div class="screen-viewport">
+
+      <!-- ============ HOME ============ -->
+      <section class="screen active" data-screen="home">
+        <div class="app-header">
+          <div class="logo">
+            <svg class="logo-mark" viewBox="0 0 24 24" fill="none"><path d="M4 12c0-1.8 1.2-3 3-3h1a2 2 0 0 0 2-2V6c0-1.8 1.2-3 3-3s3 1.2 3 3v1a2 2 0 0 0 2 2h1c1.8 0 3 1.2 3 3s-1.2 3-3 3h-1a2 2 0 0 0-2 2v1c0 1.8-1.2 3-3 3s-3-1.2-3-3v-1a2 2 0 0 0-2-2H7c-1.8 0-3-1.2-3-3Z" fill="#FF7A3D"/></svg>
+            VagaCerta
+          </div>
+          <div class="icon-btn" onclick="go('profile')" aria-label="Abrir perfil">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c1.2-4 4-6 7-6s5.8 2 7 6"/></svg>
+          </div>
+        </div>
+
+        <div class="search-field">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input id="homeSearch" placeholder="Busque por cargo, área ou palavra-chave" />
+        </div>
+
+        <div class="section-label">Áreas</div>
+        <div class="chip-row" id="homeAreaChips"></div>
+
+        <div class="section-label">Modalidade</div>
+        <div class="chip-row" id="homeModalChips"></div>
+
+        <div class="section-label">Tipo de contrato</div>
+        <div class="chip-row" id="homeContractChips"></div>
+
+        <div class="section-label">Vagas em destaque</div>
+        <div id="homeFeatured"></div>
+      </section>
+
+      <!-- ============ RESULTS ============ -->
+      <section class="screen" data-screen="results">
+        <div class="back-row">
+          <div class="icon-btn" onclick="go('home')" aria-label="Voltar">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </div>
+          <h2>Resultados</h2>
+        </div>
+        <div class="search-field" style="margin-top:10px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input id="resultsSearch" placeholder="Busque por cargo, área ou palavra-chave" />
+        </div>
+        <div class="filter-toggle-row">
+          <span class="filter-btn" onclick="toggleFilters()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+            Filtrar
+          </span>
+        </div>
+
+        <div class="filter-panel" id="filterPanel">
+          <div class="filter-group">
+            <h4>Área / Setor</h4>
+            <div class="filter-opts" data-fgroup="area"></div>
+          </div>
+          <div class="filter-group">
+            <h4>Tipo de contrato</h4>
+            <div class="filter-opts" data-fgroup="contrato"></div>
+          </div>
+          <div class="filter-group">
+            <h4>Modalidade</h4>
+            <div class="filter-opts" data-fgroup="modalidade"></div>
+          </div>
+          <div class="filter-group">
+            <h4>Senioridade</h4>
+            <div class="filter-opts" data-fgroup="senioridade"></div>
+          </div>
+          <button class="filter-clear" onclick="clearFilters()">Limpar todos os filtros</button>
+        </div>
+
+        <div class="results-count" id="resultsCount"></div>
+        <div id="resultsList" style="margin-top:8px;"></div>
+      </section>
+
+      <!-- ============ DETAIL ============ -->
+      <section class="screen" data-screen="detail">
+        <div class="back-row">
+          <div class="icon-btn" onclick="go('results')" aria-label="Voltar">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </div>
+          <h2>Detalhes da vaga</h2>
+        </div>
+        <div id="profileBannerSlot"></div>
+        <div class="detail-body" id="detailBody"></div>
+        <div class="sticky-cta">
+          <button class="primary-btn accent" onclick="go('apply1')">Candidatar-se</button>
+        </div>
+      </section>
+
+      <!-- ============ APPLY STEP 1 ============ -->
+      <section class="screen" data-screen="apply1">
+        <div class="back-row">
+          <div class="icon-btn" onclick="go('detail')" aria-label="Voltar">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </div>
+          <h2>Revise seu perfil</h2>
+        </div>
+        <div class="steps"><div class="step-dot done"></div><div class="step-dot"></div><div class="step-dot"></div></div>
+
+        <div class="form-row"><label>Nome</label><div class="form-static" id="rvName">—</div></div>
+        <div class="form-row"><label>Contato</label><div class="form-static" id="rvContact">—</div></div>
+        <div class="form-row"><label>Currículo</label><div class="form-static" id="rvResume">—</div></div>
+        <div class="form-row" id="rvExpWarning" style="display:none;">
+          <div class="empty-inline">Você ainda não adicionou experiência — sem problema, algumas vagas (como esta) não exigem. <a style="color:var(--teal);font-weight:700;cursor:pointer;" onclick="go('profile')">Completar perfil</a> se quiser mesmo assim.</div>
+        </div>
+
+        <div style="margin-top:20px;">
+          <button class="primary-btn accent" onclick="go('apply2')">Continuar</button>
+          <button class="secondary-btn" onclick="go('profile')">Editar perfil antes de continuar</button>
+        </div>
+      </section>
+
+      <!-- ============ APPLY STEP 2 ============ -->
+      <section class="screen" data-screen="apply2">
+        <div class="back-row">
+          <div class="icon-btn" onclick="go('apply1')" aria-label="Voltar">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </div>
+          <h2>Perguntas da vaga</h2>
+        </div>
+        <div class="steps"><div class="step-dot done"></div><div class="step-dot done"></div><div class="step-dot"></div></div>
+
+        <div class="form-row">
+          <label>Disponibilidade para início imediato?</label>
+          <div class="radio-row">
+            <div class="radio-opt sel" data-q="inicio" data-v="sim" onclick="pickRadio(this)">Sim</div>
+            <div class="radio-opt" data-q="inicio" data-v="nao" onclick="pickRadio(this)">Não</div>
+          </div>
+        </div>
+        <div class="form-row" id="matriculaQ" style="display:none;">
+          <label>Está matriculado(a) em uma instituição de ensino?</label>
+          <div class="radio-row">
+            <div class="radio-opt sel" data-q="matricula" data-v="sim" onclick="pickRadio(this)">Sim</div>
+            <div class="radio-opt" data-q="matricula" data-v="nao" onclick="pickRadio(this)">Não</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <label>Pretensão salarial (opcional)</label>
+          <input class="form-input" id="pretensao" placeholder="Ex.: R$ 2.200" />
+        </div>
+
+        <div style="margin-top:20px;">
+          <button class="primary-btn accent" onclick="go('apply3')">Continuar</button>
+        </div>
+      </section>
+
+      <!-- ============ APPLY STEP 3 ============ -->
+      <section class="screen" data-screen="apply3">
+        <div class="back-row">
+          <div class="icon-btn" onclick="go('apply2')" aria-label="Voltar">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </div>
+          <h2>Confirme e envie</h2>
+        </div>
+        <div class="steps"><div class="step-dot done"></div><div class="step-dot done"></div><div class="step-dot done"></div></div>
+
+        <div class="summary-box" id="summaryBox"></div>
+
+        <button class="primary-btn accent" onclick="submitApplication()">Enviar candidatura</button>
+      </section>
+
+      <!-- ============ SUCCESS ============ -->
+      <section class="screen" data-screen="success">
+        <div class="success-wrap" id="successWrap">
+          <div class="match-anim">
+            <svg class="match-piece left" viewBox="0 0 52 64" fill="none"><path d="M0 4a4 4 0 0 1 4-4h20v20a6 6 0 0 0 6 6 6 6 0 0 0 6-6V0h12a4 4 0 0 1 4 4v56a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4Z" fill="#FF7A3D"/></svg>
+            <svg class="match-piece right" viewBox="0 0 52 64" fill="none"><path d="M0 4a4 4 0 0 1 4-4h20v20a6 6 0 0 0 6 6 6 6 0 0 0 6-6V0h12a4 4 0 0 1 4 4v56a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4Z" fill="#1FA398"/></svg>
+          </div>
+          <h2>Candidatura enviada</h2>
+          <p>A empresa costuma responder em até 5 dias úteis. Você acompanha o status em "Minhas candidaturas", no seu perfil.</p>
+          <button class="primary-btn" onclick="go('home')" style="width:200px;">Voltar para vagas</button>
+        </div>
+      </section>
+
+      <!-- ============ PROFILE ============ -->
+      <section class="screen" data-screen="profile">
+        <div class="back-row">
+          <div class="icon-btn" onclick="go('home')" aria-label="Voltar">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </div>
+          <h2>Seu perfil</h2>
+        </div>
+        <div class="avatar" id="profileAvatar">?</div>
+
+        <div class="form-row"><label>Nome</label><input class="form-input" id="pfName"/></div>
+        <div class="form-row"><label>Contato</label><input class="form-input" id="pfContact"/></div>
+        <div class="form-row"><label>Cidade</label><input class="form-input" id="pfCity"/></div>
+
+        <div class="section-label" style="margin-top:20px;">Experiência</div>
+        <div class="form-row" style="padding-top:0;" id="pfExpBlock"></div>
+
+        <div class="section-label">Formação / Escolaridade</div>
+        <div class="form-row" style="padding-top:0;">
+          <select class="form-input" id="pfEdu">
+            <option>Ensino médio em andamento</option>
+            <option>Ensino médio completo</option>
+            <option>Ensino superior em andamento</option>
+            <option>Ensino superior completo</option>
+          </select>
+        </div>
+
+        <div style="margin-top:24px;">
+          <button class="primary-btn accent" onclick="saveProfile()">Salvar alterações</button>
+        </div>
+        <div class="toast" id="toast">Alterações salvas</div>
+      </section>
+
+      <!-- ============ EMPTY ============ -->
+      <section class="screen" data-screen="empty">
+        <div class="back-row">
+          <div class="icon-btn" onclick="go('results')" aria-label="Voltar">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </div>
+          <h2>Resultados</h2>
+        </div>
+        <div class="empty-state">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/><path d="M8 11h6"/></svg>
+          <h2>Nenhuma vaga encontrada com esses filtros</h2>
+          <p>Tente remover algum filtro para ver mais oportunidades.</p>
+          <button class="primary-btn accent" style="width:auto;padding:12px 22px;margin:0;" onclick="clearFilters()">Limpar filtros</button>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------------- dados ---------------- */
+const JOBS = [
+  {id:1, title:"Business Partner de RH", company:"Contexto S.A.", area:"Administrativo", contrato:"CLT", modalidade:"Híbrido", senioridade:"Pleno",
+   salario:"R$ 6.800 – 8.200", beneficios:["VR","VT","Plano de saúde","Gympass"],
+   desc:"Você vai atuar como ponte entre pessoas e negócio, apoiando lideranças de duas áreas em decisões de gestão de time, clima e desenvolvimento.",
+   req:["Experiência prévia como BP ou generalista de RH","Vivência com indicadores de pessoas","Inglês intermediário"], noExp:false, jovemAprendiz:false},
+  {id:2, title:"Desenvolvedor(a) Front-end Pleno", company:"Nortel Tech", area:"Tecnologia", contrato:"CLT", modalidade:"Remoto", senioridade:"Pleno",
+   salario:"R$ 7.500 – 9.000", beneficios:["VR","Plano de saúde","Auxílio home office"],
+   desc:"Time pequeno, produto único. Você vai trabalhar direto com quem decide o roadmap, sem camadas de aprovação.",
+   req:["React ou Vue","2+ anos de experiência","Portfólio ou GitHub ativo"], noExp:false, jovemAprendiz:false},
+  {id:3, title:"Jovem Aprendiz — Atendimento", company:"Mercado Boa Vista", area:"Comercial/Vendas", contrato:"Jovem Aprendiz", modalidade:"Presencial", senioridade:"Estagiário/Aprendiz",
+   salario:"R$ 660 (bolsa-auxílio)", beneficios:["VT","Alimentação no local"],
+   desc:"Programa de aprendizagem com carga horária compatível com a escola, acompanhamento de um mentor e certificado ao final.",
+   req:["Estar cursando o ensino médio","Disponibilidade de 4h por dia"], noExp:true, jovemAprendiz:true},
+  {id:4, title:"Analista de Vendas Júnior", company:"Girassol Distribuidora", area:"Comercial/Vendas", contrato:"CLT", modalidade:"Híbrido", senioridade:"Júnior",
+   salario:"R$ 2.900 – 3.400", beneficios:["VR","VT","Comissão"],
+   desc:"Prospecção e acompanhamento de carteira de clientes de pequeno e médio porte na região.",
+   req:["6 meses de experiência em vendas ou atendimento","Ensino médio completo"], noExp:false, jovemAprendiz:false},
+  {id:5, title:"Auxiliar de Enfermagem", company:"Clínica Vitalis", area:"Saúde", contrato:"CLT", modalidade:"Presencial", senioridade:"Júnior",
+   salario:"R$ 2.400 – 2.700", beneficios:["VT","Plano de saúde","Adicional noturno"],
+   desc:"Atuação em clínica de médio porte, escala 6x1, suporte direto à equipe de enfermagem.",
+   req:["COREN ativo","Curso técnico completo"], noExp:false, jovemAprendiz:false},
+  {id:6, title:"Professor(a) de Reforço — Matemática", company:"Instituto Aprende+", area:"Educação", contrato:"PJ", modalidade:"Presencial", senioridade:"Pleno",
+   salario:"R$ 45/hora", beneficios:["Horário flexível"],
+   desc:"Aulas de reforço para turmas do ensino fundamental II, em unidade própria ou domicílio.",
+   req:["Graduação em andamento ou completa em áreas afins","Didática comprovada"], noExp:false, jovemAprendiz:false},
+  {id:7, title:"Estágio em Marketing Digital", company:"Estúdio Cravo", area:"Administrativo", contrato:"Estágio", modalidade:"Remoto", senioridade:"Estagiário/Aprendiz",
+   salario:"R$ 1.400 (bolsa-auxílio)", beneficios:["VR","Auxílio home office"],
+   desc:"Apoio na criação de conteúdo e relatórios de performance para clientes de pequeno porte.",
+   req:["Cursando Marketing, Comunicação ou áreas afins","Não exige experiência prévia"], noExp:true, jovemAprendiz:false},
+  {id:8, title:"Jovem Aprendiz — Farmácia", company:"Rede Saúde Popular", area:"Comercial/Vendas", contrato:"Jovem Aprendiz", modalidade:"Presencial", senioridade:"Estagiário/Aprendiz",
+   salario:"R$ 660 (bolsa-auxílio)", beneficios:["VT","Uniforme"],
+   desc:"Apoio no atendimento e organização de prateleiras, com trilha de aprendizagem sobre o setor farmacêutico.",
+   req:["Estar cursando o ensino médio","Não exige experiência anterior"], noExp:true, jovemAprendiz:true},
+];
+
+const CANDIDATE = {
+  name:"", contact:"", city:"",
+  hasExperience:false,
+  profileComplete:false
+};
+
+/* ---------------- estado de filtros ---------------- */
+const FILTER_GROUPS = {
+  area: ["Tecnologia","Administrativo","Comercial/Vendas","Saúde","Educação"],
+  contrato: ["CLT","PJ","Estágio","Jovem Aprendiz","Freelance/Temporário"],
+  modalidade: ["Remoto","Híbrido","Presencial"],
+  senioridade: ["Estagiário/Aprendiz","Júnior","Pleno","Sênior","Liderança/Gestão"]
+};
+let activeFilters = {area:new Set(), contrato:new Set(), modalidade:new Set(), senioridade:new Set()};
+let currentJobId = null;
+let taskLabels = {
+  home:"Home / Busca", results:"Resultados + Filtros (T1, T2, T6)", detail:"Detalhe da vaga (T3)",
+  apply1:"Candidatura — passo 1 (T4)", apply2:"Candidatura — passo 2 (T4)", apply3:"Candidatura — passo 3 (T4)",
+  success:"Candidatura enviada", profile:"Perfil do candidato (T5)", empty:"Estado vazio"
+};
+
+/* ---------------- navegação ---------------- */
+function go(screen){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.querySelector(`.screen[data-screen="${screen}"]`).classList.add('active');
+  document.getElementById('taskLabel').textContent = "Tela: " + taskLabels[screen];
+  document.getElementById('screen-viewport-scroll')?.scrollTo(0,0);
+  if(screen==='detail') renderDetail();
+  if(screen==='apply1') renderApply1();
+  if(screen==='apply3') renderApply3();
+  if(screen==='profile') renderProfile();
+  if(screen==='success'){
+    const w = document.getElementById('successWrap');
+    w.classList.remove('play');
+    requestAnimationFrame(()=> requestAnimationFrame(()=> w.classList.add('play')));
+  }
+}
+
+/* ---------------- render: home ---------------- */
+function renderChips(container, values, onClick, spotlightSet){
+  const el = document.getElementById(container);
+  el.innerHTML = values.map(v=>{
+    const spot = spotlightSet && spotlightSet.has(v) ? ' spotlight' : '';
+    return `<span class="chip${spot}" onclick="${onClick}('${v}')">${v}</span>`;
+  }).join('');
+}
+function homeChipArea(v){ clearFilters(false); activeFilters.area.add(v); go('results'); renderResults(); syncFilterUI(); }
+function homeChipModal(v){ clearFilters(false); activeFilters.modalidade.add(v); go('results'); renderResults(); syncFilterUI(); }
+function homeChipContrato(v){ clearFilters(false); activeFilters.contrato.add(v); go('results'); renderResults(); syncFilterUI(); }
+
+function renderHome(){
+  renderChips('homeAreaChips', FILTER_GROUPS.area, 'homeChipArea');
+  renderChips('homeModalChips', FILTER_GROUPS.modalidade, 'homeChipModal');
+  renderChips('homeContractChips', FILTER_GROUPS.contrato, 'homeChipContrato', new Set(["Jovem Aprendiz"]));
+  const feat = JOBS.slice(0,3);
+  document.getElementById('homeFeatured').innerHTML = feat.map(jobCardHTML).join('');
+}
+
+function jobCardHTML(j){
+  const badge = j.jovemAprendiz ? `<span class="badge warm">Jovem Aprendiz</span>` : `<span class="badge">${j.contrato}</span>`;
+  return `
+  <div class="job-card" onclick="openJob(${j.id})">
+    <div class="job-card-top">
+      <div>
+        <p class="job-title">${j.title}</p>
+        <p class="job-company">${j.company}</p>
+      </div>
+      ${badge}
+    </div>
+    <div class="job-meta">
+      <span>${j.area}</span><span>${j.modalidade}</span><span>${j.senioridade}</span>
+    </div>
+    <div class="job-salary">${j.salario}</div>
+  </div>`;
+}
+
+function openJob(id){ currentJobId = id; go('detail'); }
+
+/* ---------------- render: results ---------------- */
+function toggleFilters(){ document.getElementById('filterPanel').classList.toggle('open'); }
+
+function buildFilterPanel(){
+  Object.entries(FILTER_GROUPS).forEach(([key, values])=>{
+    const el = document.querySelector(`.filter-opts[data-fgroup="${key}"]`);
+    el.innerHTML = values.map(v=>`<span class="filter-opt" data-key="${key}" data-val="${v}" onclick="toggleFilterOpt(this)">${v}</span>`).join('');
+  });
+}
+function toggleFilterOpt(el){
+  const key = el.dataset.key, val = el.dataset.val;
+  if(activeFilters[key].has(val)){ activeFilters[key].delete(val); el.classList.remove('on'); }
+  else { activeFilters[key].add(val); el.classList.add('on'); if(val==='Jovem Aprendiz') el.classList.add('tag-alpha'); }
+  renderResults();
+}
+function syncFilterUI(){
+  document.querySelectorAll('.filter-opt').forEach(el=>{
+    const on = activeFilters[el.dataset.key].has(el.dataset.val);
+    el.classList.toggle('on', on);
+  });
+}
+function clearFilters(rerender=true){
+  Object.keys(activeFilters).forEach(k=>activeFilters[k].clear());
+  document.querySelectorAll('.filter-opt').forEach(el=>el.classList.remove('on'));
+  if(document.getElementById('resultsSearch')) document.getElementById('resultsSearch').value='';
+  if(rerender){ go('results'); renderResults(); }
+}
+function matchesFilters(j){
+  for(const key of Object.keys(activeFilters)){
+    const set = activeFilters[key];
+    if(set.size===0) continue;
+    const jobVal = j[key];
+    if(!set.has(jobVal)) return false;
+  }
+  const q = (document.getElementById('resultsSearch')?.value || '').toLowerCase().trim();
+  if(q && !(j.title.toLowerCase().includes(q) || j.area.toLowerCase().includes(q))) return false;
+  return true;
+}
+function renderResults(){
+  const list = JOBS.filter(matchesFilters);
+  document.getElementById('resultsCount').textContent = `${list.length} vaga${list.length===1?'':'s'} encontrada${list.length===1?'':'s'}`;
+  if(list.length===0){ document.getElementById('resultsList').innerHTML=''; go('empty'); return; }
+  document.getElementById('resultsList').innerHTML = list.map(jobCardHTML).join('');
+}
+document.getElementById('resultsSearch')?.addEventListener?.('input', renderResults);
+
+/* ---------------- render: detail ---------------- */
+function renderDetail(){
+  const j = JOBS.find(x=>x.id===currentJobId) || JOBS[0];
+  currentJobId = j.id;
+  const noExpFlag = j.noExp ? `<div class="req-flag">Não exige experiência anterior</div>` : '';
+  document.getElementById('detailBody').innerHTML = `
+    <h1 class="detail-title">${j.title}</h1>
+    <p class="detail-company">${j.company}</p>
+    <div class="key-facts">
+      <div class="kf-row"><span class="kf-label">Tipo de contrato</span><span class="kf-value">${j.contrato}</span></div>
+      <div class="kf-row"><span class="kf-label">Modalidade</span><span class="kf-value">${j.modalidade}</span></div>
+      <div class="kf-row"><span class="kf-label">Senioridade</span><span class="kf-value">${j.senioridade}</span></div>
+      <div class="kf-row"><span class="kf-label">Faixa salarial</span><span class="kf-value">${j.salario}</span></div>
+      <div class="kf-row"><span class="kf-label">Benefícios</span><span class="kf-value"></span></div>
+      <div class="benefit-list">${j.beneficios.map(b=>`<span>${b}</span>`).join('')}</div>
+    </div>
+    <div class="detail-desc"><h4>Sobre a vaga</h4><p>${j.desc}</p></div>
+    <div class="detail-req"><h4>Requisitos</h4><ul>${j.req.map(r=>`<li>${r}</li>`).join('')}</ul>${noExpFlag}</div>
+  `;
+  const bannerSlot = document.getElementById('profileBannerSlot');
+  bannerSlot.innerHTML = CANDIDATE.profileComplete ? '' : `
+    <div class="profile-banner">
+      <span>Seu perfil está incompleto.</span>
+      <a onclick="go('profile')">Completar perfil</a>
+    </div>`;
+}
+
+/* ---------------- fluxo de candidatura ---------------- */
+function renderApply1(){
+  document.getElementById('rvName').textContent = CANDIDATE.name || 'Não preenchido';
+  document.getElementById('rvContact').textContent = CANDIDATE.contact || 'Não preenchido';
+  document.getElementById('rvResume').textContent = 'curriculo.pdf (anexado)';
+  const j = JOBS.find(x=>x.id===currentJobId);
+  document.getElementById('rvExpWarning').style.display = (j && j.noExp && !CANDIDATE.hasExperience) ? 'block' : 'none';
+  const showMatricula = j && j.jovemAprendiz;
+  document.getElementById('matriculaQ').style.display = showMatricula ? 'block' : 'none';
+}
+function pickRadio(el){
+  const q = el.dataset.q;
+  document.querySelectorAll(`.radio-opt[data-q="${q}"]`).forEach(o=>o.classList.remove('sel'));
+  el.classList.add('sel');
+}
+function renderApply3(){
+  const j = JOBS.find(x=>x.id===currentJobId);
+  const inicio = document.querySelector('.radio-opt[data-q="inicio"].sel')?.textContent || 'Sim';
+  const pretensao = document.getElementById('pretensao').value || 'Não informado';
+  document.getElementById('summaryBox').innerHTML = `
+    <div class="row"><span>Vaga</span><strong>${j.title}</strong></div>
+    <div class="row"><span>Empresa</span><strong>${j.company}</strong></div>
+    <div class="row"><span>Início imediato</span><strong>${inicio}</strong></div>
+    <div class="row"><span>Pretensão salarial</span><strong>${pretensao}</strong></div>
+  `;
+}
+function submitApplication(){ go('success'); }
+
+/* ---------------- perfil ---------------- */
+function renderProfile(){
+  document.getElementById('pfName').value = CANDIDATE.name;
+  document.getElementById('pfContact').value = CANDIDATE.contact;
+  document.getElementById('pfCity').value = CANDIDATE.city;
+  document.getElementById('profileAvatar').textContent = (CANDIDATE.name || '?').charAt(0).toUpperCase();
+  const expBlock = document.getElementById('pfExpBlock');
+  if(CANDIDATE.hasExperience){
+    expBlock.innerHTML = `<div class="form-static">Atendente — Loja Ponto Certo (8 meses) <a style="float:right;color:var(--teal);font-weight:700;cursor:pointer;" onclick="CANDIDATE.hasExperience=false; renderProfile();">remover</a></div>`;
+  } else {
+    expBlock.innerHTML = `<div class="empty-inline">Nenhuma experiência ainda? Sem problema — algumas vagas não exigem. <a style="color:var(--teal);font-weight:700;cursor:pointer;" onclick="CANDIDATE.hasExperience=true; renderProfile();">Adicionar mesmo assim</a></div>`;
+  }
+}
+function saveProfile(){
+  CANDIDATE.name = document.getElementById('pfName').value.trim();
+  CANDIDATE.contact = document.getElementById('pfContact').value.trim();
+  CANDIDATE.city = document.getElementById('pfCity').value.trim();
+  CANDIDATE.profileComplete = !!(CANDIDATE.name && CANDIDATE.contact);
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 1800);
+}
+
+/* ---------------- init ---------------- */
+buildFilterPanel();
+renderHome();
+renderResults();
+</script>
+</body>
+</html>

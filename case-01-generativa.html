@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pesquisa Generativa — Comportamento em Redes Sociais</title>
+  <link rel="stylesheet" href="design-system/tokens.css">
+  <style>
+    .top-nav {
+      position: sticky;
+      top: 0;
+      background: var(--color-canvas);
+      border-bottom: 1px solid var(--color-hairline);
+      z-index: 100;
+    }
+    .top-nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--space-lg);
+      height: 64px;
+    }
+    .top-nav .logo {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-ink);
+      text-decoration: none;
+    }
+    .breadcrumb {
+      display: flex;
+      gap: var(--space-sm);
+      align-items: center;
+      font-size: 14px;
+      color: var(--color-muted);
+    }
+    .breadcrumb a {
+      color: var(--color-ink);
+      text-decoration: none;
+    }
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    /* Hero section */
+    .hero-case {
+      background: var(--color-brand-pink);
+      color: var(--color-on-primary);
+      padding: var(--space-section) var(--space-lg);
+    }
+    .hero-case .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .hero-case h1 {
+      margin: 0 0 var(--space-md) 0;
+      color: var(--color-on-primary);
+    }
+    .hero-case p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin: 0;
+      opacity: 0.95;
+    }
+
+    /* Content section */
+    .case-content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: var(--space-section) var(--space-lg);
+      background: var(--color-canvas);
+    }
+
+    /* Overview grid */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--space-lg);
+      margin-bottom: var(--space-section);
+      padding-bottom: var(--space-section);
+      border-bottom: 1px solid var(--color-hairline);
+    }
+    .overview-item h3 {
+      margin: 0 0 var(--space-sm) 0;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-muted);
+    }
+    .overview-item p {
+      margin: 0;
+      font-size: 16px;
+      color: var(--color-body);
+      line-height: 1.5;
+    }
+
+    /* Section styling */
+    .case-section {
+      margin-bottom: var(--space-section);
+    }
+    .case-section h2 {
+      margin: 0 0 var(--space-lg) 0;
+      font-size: 32px;
+      font-weight: 500;
+      color: var(--color-ink);
+    }
+    .case-section h3 {
+      margin: var(--space-lg) 0 var(--space-sm) 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-ink);
+    }
+    .case-section p {
+      margin: 0 0 var(--space-md) 0;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--color-body);
+    }
+    .case-section ul {
+      margin: 0 0 var(--space-lg) 0;
+      padding-left: 20px;
+      color: var(--color-body);
+      line-height: 1.8;
+    }
+    .case-section li {
+      margin-bottom: var(--space-sm);
+    }
+
+    /* Highlight card */
+    .highlight-card {
+      background: var(--color-surface-card);
+      border-left: 4px solid var(--color-brand-pink);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      margin: var(--space-xl) 0;
+    }
+    .highlight-card h4 {
+      margin: 0 0 var(--space-sm) 0;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-brand-pink);
+    }
+    .highlight-card p {
+      margin: 0;
+      font-size: 16px;
+      color: var(--color-ink);
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    /* Methods grid */
+    .methods-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--space-lg);
+      margin: var(--space-lg) 0;
+    }
+    .method-badge {
+      background: var(--color-surface-soft);
+      border: 1px solid var(--color-hairline);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      text-align: center;
+    }
+    .method-badge strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-ink);
+      margin-bottom: var(--space-xs);
+    }
+    .method-badge p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--color-muted);
+    }
+
+    /* Links section */
+    .documentation-links {
+      background: var(--color-surface-soft);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      margin-top: var(--space-section);
+    }
+    .documentation-links h3 {
+      margin-top: 0;
+    }
+    .documentation-links ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .documentation-links a {
+      color: var(--color-ink);
+      text-decoration: underline;
+    }
+    .documentation-links a:hover {
+      color: var(--color-brand-pink);
+    }
+
+    /* Back button */
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      text-decoration: none;
+      color: var(--color-ink);
+      font-size: 14px;
+      margin-bottom: var(--space-lg);
+    }
+    .back-button:hover {
+      color: var(--color-brand-pink);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--color-surface-soft);
+      text-align: center;
+      padding: var(--space-lg);
+      color: var(--color-body);
+    }
+
+    @media (max-width: 768px) {
+      .hero-case h1 {
+        font-size: 28px;
+      }
+      .case-section h2 {
+        font-size: 24px;
+      }
+      .overview-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="top-nav">
+    <div class="container">
+      <a href="index.html" class="logo">UX Research</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero-case">
+    <div class="container">
+      <h1 class="display-lg">Pesquisa Generativa</h1>
+      <p>Comportamento em redes sociais: diferenças geracionais entre Millennials e Geração Alpha</p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <div class="case-content">
+    <div class="container">
+      <a href="index.html" class="back-button">← Voltar</a>
+
+      <!-- Overview -->
+      <div class="overview-grid">
+        <div class="overview-item">
+          <h3>Objetivo</h3>
+          <p>Explorar como o comportamento em redes sociais difere estruturalmente entre gerações</p>
+        </div>
+        <div class="overview-item">
+          <h3>Públicos</h3>
+          <p>Millennials (30-44 anos) e adolescentes (13-17 anos)</p>
+        </div>
+        <div class="overview-item">
+          <h3>Contexto</h3>
+          <p>Consumo, tomada de decisão e socialização em ambientes digitais</p>
+        </div>
+      </div>
+
+      <!-- Pergunta de Pesquisa -->
+      <section class="case-section">
+        <h2>Pergunta Central</h2>
+        <p>Como o comportamento de consumo em redes sociais difere estruturalmente entre Millennials e adolescentes da Geração Alpha, e que tendências emergentes isso revela?</p>
+      </section>
+
+      <!-- Métodos -->
+      <section class="case-section">
+        <h2>Métodos</h2>
+        <div class="methods-grid">
+          <div class="method-badge">
+            <strong>Diary Study</strong>
+            <p>Autorrrelato de comportamentos e decisões ao longo de 7 dias</p>
+          </div>
+          <div class="method-badge">
+            <strong>Journey Mapping</strong>
+            <p>Mapeamento de jornadas emocionais e de decisão</p>
+          </div>
+          <div class="method-badge">
+            <strong>Dados Secundários</strong>
+            <p>Triangulação com pesquisas de mercado reais (TIC Kids, We Are Social)</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Achado Principal -->
+      <section class="case-section">
+        <h2>Achado Principal</h2>
+        <div class="highlight-card">
+          <h4>Insight mais importante</h4>
+          <p>O "funil de decisão" não é o mesmo formato para as duas gerações. Millennials passam por uma etapa de avaliação deliberada com busca por prova social, enquanto adolescentes tomam decisões de forma mais emocional e rápida.</p>
+        </div>
+        <h3>Outros Insights-Chave</h3>
+        <ul>
+          <li><strong>Prova social:</strong> Para Millennials, recomendações de conhecidos pesam mais do que anúncios diretos (~58% confiam mais em recomendações que em publicidade).</li>
+          <li><strong>Tensão emocional:</strong> Para adolescentes, o maior ponto de tensão é pós-decisão (checagem de curtidas/comentários), não pré-decisão.</li>
+          <li><strong>Autonomia digital:</strong> Contato com desconhecidos é normalizado na geração mais jovem (30% dos 9-17 anos tiveram esse tipo de contato), com divergência entre autopercepção dos adolescentes e percepção dos responsáveis.</li>
+          <li><strong>Eixo de decisão:</strong> Decisão de compra pode não ser um eixo válido para comparar as gerações — para adolescentes, a decisão natural é sobre participação e identidade, não consumo.</li>
+          <li><strong>Uso automático:</strong> Ambas as gerações têm uso "no piloto automático", mas em contextos diferentes (Millennials à noite; adolescentes em multitasking simultâneo).</li>
+        </ul>
+      </section>
+
+      <!-- Por que importa -->
+      <section class="case-section">
+        <h2>Por que Importa</h2>
+        <p>Esta pesquisa generativa bem executada previne que a próxima etapa (teste de usabilidade e avaliação de conceitos) parta de uma suposição errada sobre como públicos diferentes tomam decisões. O insight 5 em particular — descobrir que "decisão de compra" não é um eixo válido para adolescentes — seria fácil de passar despercebido sem uma exploração generativa profunda. Isso demonstra o valor real de uma pesquisa generativa em uma trajetória de UX: entender as motivações certas antes de validar soluções.</p>
+      </section>
+
+      <!-- Documentação -->
+      <div class="documentation-links">
+        <h3>Documentação Completa</h3>
+        <p>Explore todos os artefatos, dados e análises da pesquisa no repositório:</p>
+        <ul>
+          <li><a href="../pesquisas/01-pesquisa-generativa/docs/protocolo-pesquisa-generativa.md" target="_blank">Protocolo Completo da Pesquisa</a></li>
+          <li><a href="../pesquisas/01-pesquisa-generativa/docs/personas/" target="_blank">Personas (Millennial e Geração Alpha)</a></li>
+          <li><a href="../pesquisas/01-pesquisa-generativa/docs/journey-maps/" target="_blank">Journey Maps Detalhados</a></li>
+          <li><a href="../pesquisas/01-pesquisa-generativa/docs/diary-study/" target="_blank">Entradas do Diary Study</a></li>
+          <li><a href="../pesquisas/01-pesquisa-generativa/docs/insights/sintese-insights.md" target="_blank">Síntese de Insights</a></li>
+          <li><a href="../pesquisas/01-pesquisa-generativa/data/fontes-secundarias.md" target="_blank">Fontes Secundárias Citadas</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Portfólio de UX Research © 2025</p>
+  </footer>
+</body>
+</html>
