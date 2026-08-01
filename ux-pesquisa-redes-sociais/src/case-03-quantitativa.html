@@ -264,6 +264,132 @@
       color: var(--color-ink);
     }
 
+    /* Dashboard comparativo — cores reservadas do design system (lavender/peach→coral) */
+    .dashboard-panel {
+      background: var(--color-surface-soft);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      margin: var(--space-lg) 0;
+    }
+    .chart-legend {
+      display: flex;
+      gap: var(--space-lg);
+      margin-bottom: var(--space-lg);
+      font-size: 13px;
+      color: var(--color-ink);
+      font-weight: 500;
+    }
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .legend-swatch {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      display: inline-block;
+    }
+    .swatch-millennial { background: var(--color-brand-lavender); }
+    .swatch-alpha { background: var(--color-brand-coral); }
+
+    .chart-block {
+      background: var(--color-canvas);
+      border: 1px solid var(--color-hairline);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-lg);
+    }
+    .chart-block:last-child { margin-bottom: 0; }
+    .chart-block h4 {
+      margin: 0 0 var(--space-md) 0;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-ink);
+    }
+    .bar-chart {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      position: relative;
+      padding-top: 4px;
+    }
+    .bar-row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .bar-row-label {
+      font-size: 13px;
+      color: var(--color-body);
+      text-align: right;
+    }
+    .bar-track {
+      position: relative;
+      height: 24px;
+      background: var(--color-surface-card);
+      border-radius: var(--radius-xs);
+    }
+    .bar-fill {
+      height: 20px;
+      margin-top: 2px;
+      border-radius: 0 4px 4px 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: var(--space-sm);
+      transition: filter 0.15s ease;
+      outline-offset: 2px;
+    }
+    .bar-fill:hover, .bar-fill:focus-visible {
+      filter: brightness(0.94);
+    }
+    .fill-millennial { background: var(--color-brand-lavender); }
+    .fill-alpha { background: var(--color-brand-coral); }
+    .bar-value {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-ink);
+      white-space: nowrap;
+    }
+    .benchmark-line {
+      position: absolute;
+      top: 4px;
+      bottom: 0;
+      width: 1px;
+      background: var(--color-muted-soft);
+    }
+    .benchmark-tag {
+      position: absolute;
+      top: -18px;
+      left: 0;
+      transform: translateX(-50%);
+      font-size: 11px;
+      color: var(--color-muted);
+      white-space: nowrap;
+    }
+    .chart-note {
+      margin: var(--space-sm) 0 0 0;
+      font-size: 12px;
+      color: var(--color-muted);
+    }
+
+    /* Hypothesis vs evidence table */
+    .verdict-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .verdict-confirmado { background: #dcfce7; color: #166534; }
+    .verdict-parcial { background: #fef3c7; color: #92400e; }
+    .verdict-na { background: #f0f0f0; color: var(--color-muted); }
+
     /* Category badge (reusa badge-pill do design system) */
     .category-badge {
       display: inline-flex;
@@ -623,6 +749,136 @@
           <p>O item 9 ("me senti confiante usando o app") teve a <strong>pior média entre os itens positivos (3,0)</strong>, destoando de "fácil de usar" (4,5) e "aprenderia rápido" (4,5). Isso é internamente coerente com o achado real: o problema do iFood não é a usabilidade básica (funciona bem, refletido na nota real de 4,7/5), é a <strong>confiança</strong> na parte financeira/transparência. SUS mede usabilidade percebida da interface, não necessariamente confiabilidade do serviço — os dois podem divergir, como divergiram aqui.</p>
         </div>
         <p>Diferença entre grupos: Alpha pontuou ~7,5 pontos abaixo de Millennial, principalmente pelos itens 4 e 10 (necessidade de apoio/aprendizado) — coerente com a hipótese de que usuários novos levam mais tempo para se sentir fluentes no produto, mesmo em um app popular e bem avaliado.</p>
+      </section>
+
+      <!-- Dashboard Comparativo -->
+      <section class="case-section">
+        <h2>Dashboard Comparativo — Millennial vs Geração Alpha</h2>
+        <p class="section-intro">Reunindo as três medições quantitativas por geração feitas neste portfólio (SUS desta pesquisa + task success e tree testing da Pesquisa Avaliativa), e confrontando com as hipóteses levantadas na Pesquisa Generativa. Todos os valores vêm diretamente das tabelas já documentadas nas três pesquisas — nenhum dado novo foi coletado para este dashboard.</p>
+
+        <div class="dashboard-panel">
+          <div class="chart-legend">
+            <span class="legend-item"><span class="legend-swatch swatch-millennial"></span> Millennial</span>
+            <span class="legend-item"><span class="legend-swatch swatch-alpha"></span> Geração Alpha</span>
+          </div>
+
+          <div class="chart-block">
+            <h4>SUS Score — iFood (Pesquisa 3)</h4>
+            <div class="bar-chart">
+              <div class="bar-row">
+                <div class="bar-row-label">Millennial</div>
+                <div class="bar-track">
+                  <div class="bar-fill fill-millennial" style="width:80.0%;" tabindex="0" title="Millennial: 80,0 pontos">
+                    <span class="bar-value">80,0</span>
+                  </div>
+                  <div class="benchmark-line" style="left:68%;"><span class="benchmark-tag">68</span></div>
+                </div>
+              </div>
+              <div class="bar-row">
+                <div class="bar-row-label">Geração Alpha</div>
+                <div class="bar-track">
+                  <div class="bar-fill fill-alpha" style="width:72.5%;" tabindex="0" title="Geração Alpha: 72,5 pontos">
+                    <span class="bar-value">72,5</span>
+                  </div>
+                  <div class="benchmark-line" style="left:68%;"></div>
+                </div>
+              </div>
+            </div>
+            <p class="chart-note">Linha vertical = benchmark de mercado (~68, Bangor/Kortum/Miller 2008). Escala 0-100.</p>
+          </div>
+
+          <div class="chart-block">
+            <h4>Task Success Rate médio — Teste de Usabilidade VagaCerta (Pesquisa 2, T1-T5)</h4>
+            <div class="bar-chart">
+              <div class="bar-row">
+                <div class="bar-row-label">Millennial</div>
+                <div class="bar-track">
+                  <div class="bar-fill fill-millennial" style="width:100%;" tabindex="0" title="Millennial: 100% de sucesso médio">
+                    <span class="bar-value">100%</span>
+                  </div>
+                </div>
+              </div>
+              <div class="bar-row">
+                <div class="bar-row-label">Geração Alpha</div>
+                <div class="bar-track">
+                  <div class="bar-fill fill-alpha" style="width:96%;" tabindex="0" title="Geração Alpha: 96% de sucesso médio">
+                    <span class="bar-value">96%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="chart-note">Média das tarefas T1-T5 (comuns aos dois grupos); T6 (só Grupo B) teve 100% e não entra na média comparativa.</p>
+          </div>
+
+          <div class="chart-block">
+            <h4>Tree Testing — Success Rate médio (Pesquisa 2, TT1-TT4)</h4>
+            <div class="bar-chart">
+              <div class="bar-row">
+                <div class="bar-row-label">Millennial</div>
+                <div class="bar-track">
+                  <div class="bar-fill fill-millennial" style="width:75.25%;" tabindex="0" title="Millennial: 75,3% de sucesso médio">
+                    <span class="bar-value">75,3%</span>
+                  </div>
+                </div>
+              </div>
+              <div class="bar-row">
+                <div class="bar-row-label">Geração Alpha</div>
+                <div class="bar-track">
+                  <div class="bar-fill fill-alpha" style="width:67.25%;" tabindex="0" title="Geração Alpha: 67,3% de sucesso médio">
+                    <span class="bar-value">67,3%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="chart-note">Média das 4 tarefas (TT1-TT4). Diretividade segue o mesmo padrão, com Alpha sistematicamente abaixo.</p>
+          </div>
+        </div>
+
+        <div class="highlight-card">
+          <h4>Leitura do Dashboard</h4>
+          <p>Nas três medições — em dois métodos diferentes (avaliativo e quantitativo) e dois produtos diferentes (VagaCerta e iFood) — a Geração Alpha pontua sistematicamente um pouco abaixo do Millennial, mas a diferença nunca é grande (4 a 8 pontos percentuais). Esse padrão consistente e pequeno é evidência quantitativa direta a favor do Achado 3 da Pesquisa 2: os problemas de usabilidade encontrados no portfólio são de produto, não de geração.</p>
+        </div>
+
+        <h3>Hipóteses da Pesquisa Generativa vs. Evidência Quantitativa</h3>
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr><th>Hipótese / Insight</th><th>Origem</th><th>Evidência nas Pesquisas 2 e 3</th><th>Veredito</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Alpha terá desempenho/satisfação um pouco abaixo do Millennial, mas por motivo de produto, não de geração</td>
+                <td>Achado 3, Pesquisa 2</td>
+                <td>Padrão se repete nas 3 medições acima: sempre pequeno (4-8pp) e nunca concentrado em um único ponto</td>
+                <td><span class="verdict-badge verdict-confirmado">Confirmado</span></td>
+              </tr>
+              <tr>
+                <td>H2 — autonomia e risco percebido diferem entre gerações</td>
+                <td>Protocolo, Pesquisa 1</td>
+                <td>Alpha se autoavalia mais autônomo (72%) do que os responsáveis reconhecem (57%) — TIC Kids Online 2025</td>
+                <td><span class="verdict-badge verdict-confirmado">Confirmado</span></td>
+              </tr>
+              <tr>
+                <td>IS2 — prova social/recomendação pesa mais para Millennials</td>
+                <td>Síntese, Pesquisa 1</td>
+                <td>58% dos Millennials confiam mais em recomendações/IA do que em pessoas próximas — mLabs/Conversion 2025</td>
+                <td><span class="verdict-badge verdict-confirmado">Confirmado</span></td>
+              </tr>
+              <tr>
+                <td>IS5 — "decisão de compra" pode não ser um eixo válido de comparação entre gerações</td>
+                <td>Síntese, Pesquisa 1</td>
+                <td>Nenhuma das Pesquisas 2 ou 3 mediu comportamento de compra por geração — a lacuna identificada na Pesquisa 1 se manteve</td>
+                <td><span class="verdict-badge verdict-confirmado">Confirmado</span></td>
+              </tr>
+              <tr>
+                <td>H1 — motivo de uso difere estruturalmente (consumo/compra vs. socialização)</td>
+                <td>Protocolo, Pesquisa 1</td>
+                <td>Não testável com os métodos avaliativo/quantitativo deste portfólio — medem desempenho e satisfação, não motivação declarada</td>
+                <td><span class="verdict-badge verdict-na">Não avaliável aqui</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <!-- Implicações -->
