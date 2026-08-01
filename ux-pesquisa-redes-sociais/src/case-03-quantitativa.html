@@ -224,6 +224,43 @@
       color: var(--color-muted);
     }
 
+    /* Referências metodológicas */
+    .method-refs {
+      background: var(--color-surface-soft);
+      border-left: 3px solid var(--color-brand-ochre);
+      border-radius: var(--radius-md);
+      padding: var(--space-md) var(--space-lg);
+      margin-top: var(--space-lg);
+    }
+    .method-refs h4 {
+      margin: 0 0 var(--space-sm) 0;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-muted);
+    }
+    .method-refs ol {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 13px;
+      color: var(--color-muted);
+      line-height: 1.6;
+    }
+    .method-refs li {
+      margin-bottom: var(--space-xs);
+    }
+    .method-refs li:last-child {
+      margin-bottom: 0;
+    }
+    .method-refs a {
+      color: var(--color-body);
+      text-decoration: underline;
+    }
+    .method-refs a:hover {
+      color: var(--color-ink);
+    }
+
     /* Stats grid (métricas reais do app) */
     .stats-grid {
       display: grid;
@@ -584,6 +621,15 @@
             <strong>System Usability Scale</strong>
             <p>Questionário padronizado de 10 itens, painel simulado de 6 respondentes</p>
           </div>
+        </div>
+        <div class="method-refs">
+          <h4>Fundamentação metodológica</h4>
+          <ol>
+            <li>Brooke, J. (1996). <a href="https://www.researchgate.net/publication/319394819_SUS_--_a_quick_and_dirty_usability_scale" target="_blank" rel="noopener">SUS: A 'quick and dirty' usability scale</a>. In <em>Usability Evaluation in Industry</em>, 189-194. Taylor &amp; Francis — instrumento original de 10 itens e fórmula de pontuação aplicados nesta pesquisa.</li>
+            <li>Bangor, A., Kortum, P. &amp; Miller, J. (2008). <a href="https://www.researchgate.net/publication/200553206_The_System_Usability_Scale_SUS_an_Empirical_evaluation" target="_blank" rel="noopener">The System Usability Scale: An empirical evaluation</a>. <em>Int. J. of Human-Computer Interaction</em>, 24(6) — origem do benchmark de ~68 usado como linha de comparação nos gráficos.</li>
+            <li>Sauro, J. &amp; Lewis, J. R. <a href="https://measuringu.com/book/quantifying-the-user-experience-practical-statistics-for-user-research/" target="_blank" rel="noopener">Quantifying the User Experience: Practical Statistics for User Research</a>. Morgan Kaufmann — tratamento estatístico de métricas de UX com amostras pequenas.</li>
+            <li>Pagano, D. &amp; Maalej, W. (2013). <a href="https://www.researchgate.net/publication/260156697_User_Feedback_in_the_AppStore_An_Empirical_Study" target="_blank" rel="noopener">User feedback in the AppStore: An empirical study</a>. <em>IEEE RE '13</em> — fundamenta o uso de avaliações de loja de aplicativos como fonte de pesquisa, incluindo a ressalva sobre variação de qualidade do conteúdo.</li>
+          </ol>
         </div>
       </section>
 
