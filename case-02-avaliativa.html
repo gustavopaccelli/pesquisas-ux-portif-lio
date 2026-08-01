@@ -48,6 +48,21 @@
       margin: 0;
       color: var(--color-on-dark-soft);
     }
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-top: var(--space-lg);
+    }
+    .hero-tag {
+      display: inline-flex;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      background: rgba(255,255,255,0.12);
+      color: var(--color-on-dark);
+      font-size: 13px;
+      font-weight: 500;
+    }
 
     /* Content section */
     .case-content {
@@ -60,7 +75,7 @@
     /* Overview grid */
     .overview-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: var(--space-lg);
       margin-bottom: var(--space-section);
       padding-bottom: var(--space-section);
@@ -97,13 +112,19 @@
       font-weight: 600;
       color: var(--color-ink);
     }
+    .case-section h4 {
+      margin: var(--space-lg) 0 var(--space-xs) 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-ink);
+    }
     .case-section p {
       margin: 0 0 var(--space-md) 0;
       font-size: 16px;
       line-height: 1.6;
       color: var(--color-body);
     }
-    .case-section ul {
+    .case-section ul, .case-section ol {
       margin: 0 0 var(--space-lg) 0;
       padding-left: 20px;
       color: var(--color-body);
@@ -111,6 +132,11 @@
     }
     .case-section li {
       margin-bottom: var(--space-sm);
+    }
+    .section-intro {
+      color: var(--color-muted);
+      font-size: 15px;
+      margin-bottom: var(--space-lg);
     }
 
     /* Highlight card */
@@ -137,26 +163,35 @@
       line-height: 1.6;
     }
 
-    /* Problem table */
-    .problems-table {
+    /* Generic data table (results, problems, tasks) */
+    .data-table {
       width: 100%;
       border-collapse: collapse;
       margin: var(--space-lg) 0;
-      font-size: 14px;
+      font-size: 13px;
     }
-    .problems-table th {
+    .data-table th {
       text-align: left;
       background: var(--color-surface-card);
-      padding: var(--space-md);
+      padding: var(--space-sm) var(--space-md);
       font-weight: 600;
       border-bottom: 2px solid var(--color-hairline);
+      white-space: nowrap;
     }
-    .problems-table td {
-      padding: var(--space-md);
+    .data-table td {
+      padding: var(--space-sm) var(--space-md);
       border-bottom: 1px solid var(--color-hairline);
+      vertical-align: top;
     }
-    .problems-table tr:last-child td {
+    .data-table tr:last-child td {
       border-bottom: none;
+    }
+    .table-scroll {
+      overflow-x: auto;
+      margin: var(--space-lg) 0;
+    }
+    .table-scroll .data-table {
+      margin: 0;
     }
     .severity-alta {
       color: #ef4444;
@@ -192,6 +227,152 @@
       margin: 0;
       font-size: 13px;
       color: var(--color-muted);
+    }
+
+    /* Stats grid (dados de mercado) */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-md);
+      margin: var(--space-lg) 0;
+    }
+    .stat-card {
+      background: var(--color-surface-card);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+    }
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 40px;
+      font-weight: 500;
+      color: var(--color-brand-teal);
+      line-height: 1;
+      margin-bottom: var(--space-sm);
+    }
+    .stat-label {
+      font-size: 14px;
+      color: var(--color-ink);
+      font-weight: 500;
+      line-height: 1.4;
+      margin-bottom: var(--space-xs);
+    }
+    .stat-source {
+      font-size: 12px;
+      color: var(--color-muted);
+    }
+    .stat-source a {
+      color: var(--color-muted);
+      text-decoration: underline;
+    }
+    .stat-source a:hover {
+      color: var(--color-brand-teal);
+    }
+
+    /* Persona cards */
+    .persona-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: var(--space-lg);
+      margin: var(--space-lg) 0;
+    }
+    .persona-card {
+      border: 1px solid var(--color-hairline);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      background: var(--color-canvas);
+    }
+    .persona-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+    .persona-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-full);
+      background: var(--color-brand-teal);
+      color: var(--color-on-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+    .persona-header h3 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-ink);
+    }
+    .persona-header span {
+      display: block;
+      font-size: 13px;
+      color: var(--color-muted);
+      margin-top: 2px;
+    }
+    .persona-card ul {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 14px;
+    }
+    .persona-card li {
+      margin-bottom: var(--space-xs);
+    }
+    .persona-goal {
+      background: var(--color-surface-soft);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      font-size: 14px;
+      color: var(--color-body);
+      margin: var(--space-md) 0;
+    }
+    .persona-goal strong {
+      color: var(--color-ink);
+    }
+
+    /* Tree structure */
+    .tree-structure {
+      background: var(--color-surface-soft);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.9;
+      color: var(--color-body);
+      margin: var(--space-lg) 0;
+      overflow-x: auto;
+    }
+    .tree-structure .node-root { color: var(--color-ink); font-weight: 600; }
+    .tree-structure .node-branch { color: var(--color-brand-teal); font-weight: 600; }
+    .tree-structure .node-highlight {
+      background: var(--color-brand-teal);
+      color: var(--color-on-dark);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    /* Achado numbered list */
+    .achado-item {
+      border: 1px solid var(--color-hairline);
+      border-radius: var(--radius-md);
+      padding: var(--space-md) var(--space-lg);
+      margin-bottom: var(--space-md);
+    }
+    .achado-item h4 {
+      margin: 0 0 var(--space-xs) 0;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-brand-teal);
+    }
+    .achado-item p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--color-body);
+      line-height: 1.6;
     }
 
     /* Prototype notice */
@@ -271,12 +452,12 @@
       .overview-grid {
         grid-template-columns: 1fr;
       }
-      .problems-table {
+      .data-table {
         font-size: 12px;
       }
-      .problems-table th,
-      .problems-table td {
-        padding: var(--space-sm);
+      .data-table th,
+      .data-table td {
+        padding: var(--space-xs) var(--space-sm);
       }
     }
   </style>
@@ -294,6 +475,11 @@
     <div class="container">
       <h1 class="display-lg">Pesquisa Avaliativa</h1>
       <p>Teste de usabilidade e tree testing — Plataforma de vagas de emprego VagaCerta</p>
+      <div class="hero-tags">
+        <span class="hero-tag">Teste de Usabilidade Moderado</span>
+        <span class="hero-tag">Tree Testing</span>
+        <span class="hero-tag">Protótipo Funcional</span>
+      </div>
     </div>
   </section>
 
@@ -310,11 +496,15 @@
         </div>
         <div class="overview-item">
           <h3>Público</h3>
-          <p>Millennials e adolescentes em contexto de busca de emprego</p>
+          <p>Millennials e adolescentes (jovem aprendiz) em contexto de busca de emprego</p>
         </div>
         <div class="overview-item">
           <h3>Produto</h3>
-          <p>VagaCerta — plataforma fictícia de busca de vagas</p>
+          <p>VagaCerta — protótipo fictício clicável, HTML/CSS/JS funcional</p>
+        </div>
+        <div class="overview-item">
+          <h3>Amostra</h3>
+          <p>5 participantes/grupo no teste de usabilidade; 16 respondentes/grupo no tree testing</p>
         </div>
       </div>
 
@@ -322,6 +512,10 @@
       <section class="case-section">
         <h2>Pergunta Central</h2>
         <p>Um usuário consegue, de forma eficiente e sem erros, executar tarefas-chave de busca e candidatura em uma plataforma de vagas, e localizar categorias em uma arquitetura de informação baseada só em texto (sem design visual)?</p>
+        <div class="highlight-card">
+          <h4>Por que este projeto vem depois da Pesquisa 1</h4>
+          <p>O insight IS5 da Pesquisa Generativa mostrou que a jornada de decisão difere estruturalmente entre gerações — reforçando a necessidade de validar hipóteses de design com usuários reais, em vez de assumir que uma única arquitetura serve igualmente bem a públicos diferentes. Este projeto testa exatamente isso, em outro domínio (emprego, não redes sociais).</p>
+        </div>
       </section>
 
       <!-- Métodos -->
@@ -330,53 +524,239 @@
         <div class="methods-grid">
           <div class="method-badge">
             <strong>Teste de Usabilidade</strong>
-            <p>Moderado com think-aloud, tarefas com métrica de sucesso/erro</p>
+            <p>Moderado, think-aloud, sessão de 30-40min, 6 tarefas com métrica de sucesso/tempo/erro</p>
           </div>
           <div class="method-badge">
             <strong>Tree Testing</strong>
-            <p>Teste de arquitetura de informação em árvore texto</p>
+            <p>Árvore de IA em texto puro, isolando estrutura/nomenclatura do design visual</p>
           </div>
           <div class="method-badge">
             <strong>Prototipagem</strong>
-            <p>Protótipo clicável HTML/CSS, autocontido, sem dependências externas</p>
+            <p>Protótipo clicável HTML/CSS/JS, autocontido, sem dependências externas</p>
           </div>
+        </div>
+      </section>
+
+      <!-- Dados de mercado -->
+      <section class="case-section">
+        <h2>Dados de Mercado que Fundamentam o Projeto</h2>
+        <p class="section-intro">O recorte de pesquisa se ancora em dados reais sobre o mercado de trabalho jovem brasileiro e a adoção de plataformas de vagas. Fontes completas em <code>data/fontes-secundarias.md</code>.</p>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number">25,1%</div>
+            <div class="stat-label">de desemprego entre adolescentes de 14-17 anos, mais que o dobro da média nacional (5,8%)</div>
+            <div class="stat-source">Fonte: <a href="https://www.gov.br/trabalho-e-emprego/pt-br/noticias-e-conteudo/2026/junho/emprego-formal-alcanca-57-2-dos-jovens-ocupados-no-brasil-aponta-estudo-do-mte" target="_blank" rel="noopener">MTE — Diagnóstico da Juventude Brasileira, 2026 ↗</a></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">13,8%</div>
+            <div class="stat-label">de desemprego entre jovens de 18-24 anos, também acima da média nacional</div>
+            <div class="stat-source">Fonte: <a href="https://www.gov.br/trabalho-e-emprego/pt-br/noticias-e-conteudo/2026/junho/emprego-formal-alcanca-57-2-dos-jovens-ocupados-no-brasil-aponta-estudo-do-mte" target="_blank" rel="noopener">MTE — Diagnóstico da Juventude Brasileira, 2026 ↗</a></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">6,2M</div>
+            <div class="stat-label">de jovens brasileiros de 14-24 anos são "nem-nem" — fora da escola e do trabalho</div>
+            <div class="stat-source">Fonte: <a href="https://www.gov.br/trabalho-e-emprego/pt-br/noticias-e-conteudo/2026/junho/emprego-formal-alcanca-57-2-dos-jovens-ocupados-no-brasil-aponta-estudo-do-mte" target="_blank" rel="noopener">MTE — Diagnóstico da Juventude Brasileira, 2026 ↗</a></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">&gt;45%</div>
+            <div class="stat-label">de informalidade entre jovens empregados — mais que o dobro da informalidade geral</div>
+            <div class="stat-source">Fonte: <a href="https://agenciadenoticias.ibge.gov.br/agencia-sala-de-imprensa/2013-agencia-de-noticias/releases/45759-pnad-continua-em-2025-taxa-anual-de-desocupacao-foi-de-5-6-enquanto-taxa-de-subutilizacao-foi-14-5" target="_blank" rel="noopener">IBGE — PNAD Contínua ↗</a></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">100M</div>
+            <div class="stat-label">de usuários do LinkedIn no Brasil — principal plataforma profissional para o público Millennial</div>
+            <div class="stat-source">Fonte: <a href="https://itforum.com.br/noticias/linkedin-chega-a-100-milhoes-de-usuarios-no-br" target="_blank" rel="noopener">LinkedIn/IT Forum, junho 2026 ↗</a></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">~4.000</div>
+            <div class="stat-label">empresas clientes e ~40 milhões de candidatos cadastrados na Gupy (ATS usado por Ambev, Itaú, Magazine Luiza)</div>
+            <div class="stat-source">Fonte: <a href="https://exame.com/carreira/gupy-atinge-1-milhao-de-contratacoes-em-sua-plataforma-e-aposta-em-novos-produtos-para-o-mundo-do-rh/" target="_blank" rel="noopener">Exame ↗</a></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Personas -->
+      <section class="case-section">
+        <h2>Personas</h2>
+        <p class="section-intro">Reaproveitam Camila e Théo da Pesquisa 1 — mesmas pessoas, novo contexto de uso (busca de emprego em vez de redes sociais) — para dar continuidade narrativa ao portfólio.</p>
+        <div class="persona-grid">
+          <div class="persona-card">
+            <div class="persona-header">
+              <div class="persona-avatar">CA</div>
+              <div>
+                <h3>Camila Andrade, 34</h3>
+                <span>Analista de RH em transição de carreira</span>
+              </div>
+            </div>
+            <p style="font-size:14px;">Já usa LinkedIn profissionalmente; nunca usou um ATS como candidata — só como recrutadora.</p>
+            <ul>
+              <li>Quer um processo de candidatura rápido, sem repetir o mesmo dado várias vezes</li>
+              <li>Valoriza transparência de faixa salarial e benefícios antes de investir tempo no processo</li>
+              <li>Pouca paciência para formulários longos — abandono provável se o cadastro for repetitivo</li>
+            </ul>
+            <div class="persona-goal"><strong>Objetivo na plataforma:</strong> encontrar rapidamente vagas de "Business Partner" ou similar, filtrando por modalidade híbrida/remota e checando salário/benefícios antes de se candidatar.</div>
+          </div>
+          <div class="persona-card">
+            <div class="persona-header">
+              <div class="persona-avatar">TF</div>
+              <div>
+                <h3>Théo Ferreira, 17</h3>
+                <span>Candidato a Jovem Aprendiz</span>
+              </div>
+            </div>
+            <p style="font-size:14px;">Nunca usou uma plataforma de vagas genérica; não conhece com precisão o termo técnico "Jovem Aprendiz".</p>
+            <ul>
+              <li>Pode buscar por termos como "primeiro emprego" ou "trabalho pra estudante", não pelo termo técnico exato</li>
+              <li>Alto risco de não encontrar a categoria certa se estiver atrás de terminologia que ele não usa</li>
+              <li>Pode desistir de um cadastro que peça informações que não tem, como "experiência anterior"</li>
+            </ul>
+            <div class="persona-goal"><strong>Objetivo na plataforma:</strong> encontrar, sem saber o termo técnico exato, vagas de jovem aprendiz próximas de casa, e entender rapidamente se precisa de experiência prévia (não tem) para se candidatar.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tarefas do Teste de Usabilidade -->
+      <section class="case-section">
+        <h2>Tarefas do Teste de Usabilidade</h2>
+        <p class="section-intro">6 tarefas em ordem crescente de complexidade, executadas no protótipo com protocolo think-aloud.</p>
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr><th>#</th><th>Tarefa</th><th>Métrica capturada</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>T1</strong></td><td>Encontrar uma vaga de uma área específica na modalidade remoto</td><td>Task success, tempo, nº de erros</td></tr>
+              <tr><td><strong>T2</strong></td><td>Filtrar as vagas para mostrar apenas as de tipo CLT</td><td>Task success, tempo, nº de erros</td></tr>
+              <tr><td><strong>T3</strong></td><td>Abrir os detalhes de uma vaga e identificar salário e benefícios</td><td>Task success, tempo</td></tr>
+              <tr><td><strong>T4</strong></td><td>Candidatar-se a uma vaga (fluxo de 3 passos)</td><td>Task success, tempo, erros, pontos de abandono</td></tr>
+              <tr><td><strong>T5</strong></td><td>Voltar e editar informação do perfil de candidato</td><td>Task success, tempo</td></tr>
+              <tr><td><strong>T6</strong> <span style="color:var(--color-muted);font-weight:400;">(só Grupo B)</span></td><td>Encontrar vagas específicas para jovem aprendiz</td><td>Task success — testa se a categoria é descobrível sem saber o termo exato</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Resultados do Teste de Usabilidade -->
+      <section class="case-section">
+        <h2>Resultados do Teste de Usabilidade</h2>
+        <p class="section-intro">5 participantes por grupo. Grupo A = Millennial; Grupo B = Geração Alpha (candidato a jovem aprendiz).</p>
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr><th>Tarefa</th><th>A — Sucesso</th><th>A — Tempo</th><th>A — Erros</th><th>B — Sucesso</th><th>B — Tempo</th><th>B — Erros</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>T1 — Vaga remota</td><td>5/5 (100%)</td><td>18s</td><td>0,2</td><td>5/5 (100%)</td><td>22s</td><td>0,4</td></tr>
+              <tr><td>T2 — Filtrar CLT</td><td>5/5 (100%)</td><td>9s</td><td>0</td><td>5/5 (100%)</td><td>11s</td><td>0,2</td></tr>
+              <tr><td>T3 — Salário/benefícios</td><td>5/5 (100%)</td><td>7s</td><td>0</td><td>5/5 (100%)</td><td>8s</td><td>0</td></tr>
+              <tr><td>T4 — Candidatar-se</td><td>5/5 (100%)</td><td>71s</td><td>0,8</td><td><strong>4/5 (80%)</strong></td><td><strong>96s</strong></td><td><strong>1,6</strong></td></tr>
+              <tr><td>T5 — Editar perfil</td><td>5/5 (100%)</td><td>24s</td><td>0,2</td><td>5/5 (100%)</td><td>19s</td><td>0</td></tr>
+              <tr><td>T6 — Vaga p/ 1º emprego</td><td>—</td><td>—</td><td>—</td><td><strong>5/5 (100%)</strong></td><td><strong>4s</strong></td><td>0</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="achado-item">
+          <h4>Achado 1 — T6 validou a decisão de design mais importante do wireframe</h4>
+          <p>Todos os 5 participantes do Grupo B encontraram a categoria "Jovem Aprendiz" quase instantaneamente (~4s, 0 erros), porque o chip está visível diretamente na Home, sem precisar abrir nenhum menu — exatamente a decisão de design marcada como crítica na especificação de wireframes.</p>
+        </div>
+        <div class="achado-item">
+          <h4>Achado 2 — T4 é o ponto de maior fricção, por um motivo real e específico</h4>
+          <p>1 participante do Grupo B abandonou a tarefa após clicar em "editar perfil antes de continuar" a partir do passo 1 da candidatura, e não conseguiu voltar — o protótipo não guarda o "de onde vim" para retornar automaticamente. É uma fricção real do fluxo implementado. Recomendação: o botão "editar perfil" deveria abrir como modal/etapa inline, sem sair do fluxo de candidatura.</p>
+        </div>
+        <div class="achado-item">
+          <h4>Achado 3 — Grupo B tem tempo/erros maiores, mas a diferença só é grande na T4</h4>
+          <p>Coerente com o esperado: usuários menos experientes navegam um pouco mais devagar, mas o problema fica concentrado em um ponto específico e corrigível (T4), não espalhado pelo produto inteiro.</p>
+        </div>
+      </section>
+
+      <!-- Árvore de informação -->
+      <section class="case-section">
+        <h2>Árvore de Informação Testada</h2>
+        <p class="section-intro">Estrutura testada no Tree Testing, em formato texto puro, sem apoio visual do protótipo.</p>
+        <div class="tree-structure">
+<span class="node-root">Vagas</span><br>
+├── <span class="node-branch">Área/Setor</span> — Tecnologia, Administrativo, Comercial/Vendas, Saúde, Educação...<br>
+├── <span class="node-branch">Tipo de contrato</span> — CLT, PJ, Estágio, <span class="node-highlight">Jovem Aprendiz</span>, Freelance/Temporário<br>
+├── <span class="node-branch">Modalidade</span> — Remoto, Híbrido, Presencial<br>
+├── <span class="node-branch">Senioridade</span> — Estagiário/Aprendiz, Júnior, Pleno, Sênior, Liderança/Gestão<br>
+└── <span class="node-branch">Benefícios e Salário</span> — Faixa salarial, Benefícios (VR, VT, plano de saúde)
+        </div>
+      </section>
+
+      <!-- Resultados do Tree Testing -->
+      <section class="case-section">
+        <h2>Resultados do Tree Testing</h2>
+        <p class="section-intro">16 respondentes por grupo, resultados agregados por tarefa.</p>
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr><th>Tarefa</th><th>Nó correto</th><th>Millennial — Sucesso</th><th>Millennial — Diretividade</th><th>Alpha — Sucesso</th><th>Alpha — Diretividade</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>TT1 — Tecnologia remota</td><td>Área + Modalidade (2 nós)</td><td>56%</td><td>44%</td><td>50%</td><td>38%</td></tr>
+              <tr><td>TT2 — Plano de saúde</td><td>Benefícios e Salário</td><td>88%</td><td>81%</td><td>75%</td><td>63%</td></tr>
+              <tr><td>TT3 — 1º emprego</td><td>Tipo de contrato &gt; Jovem Aprendiz</td><td>63%</td><td>50%</td><td>56%</td><td>44%</td></tr>
+              <tr><td>TT4 — Vaga de liderança</td><td>Senioridade &gt; Liderança/Gestão</td><td>94%</td><td>94%</td><td>88%</td><td>81%</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="achado-item">
+          <h4>Achado 1 — TT1 revela uma limitação metodológica, não um defeito de produto</h4>
+          <p>A árvore tem 5 grupos paralelos que, na interface visual, funcionam como filtros combináveis — mas o tree testing clássico pede um único caminho na hierarquia. Uma tarefa que depende de duas facetas ao mesmo tempo ("tecnologia" + "remoto") não tem resposta única na árvore, derrubando a taxa de sucesso mesmo sem problema real de nomenclatura.</p>
+        </div>
+        <div class="achado-item">
+          <h4>Achado 2 — TT3 confirma uma ambiguidade que o teste de usabilidade não conseguiu enxergar</h4>
+          <p>No teste de usabilidade (T6), 100% do Grupo B encontrou "Jovem Aprendiz" quase instantaneamente — mas só porque o chip estava visível na tela. No Tree Testing, sem essa pista visual, o sucesso cai para 56-63%, porque a árvore tem dois nós que podem parecer certos: "Tipo de contrato &gt; Jovem Aprendiz" (correto) e "Senioridade &gt; Estagiário/Aprendiz" (parece certo, mas é sobre nível, não modalidade de contrato).</p>
+        </div>
+        <div class="achado-item">
+          <h4>Achado 3 — a diferença geracional é pequena e consistente, não concentrada em uma tarefa</h4>
+          <p>O Grupo Alpha teve desempenho ligeiramente pior em quase todas as tarefas, mas não há uma tarefa onde a geração "erra sozinha" — sugerindo que os problemas (TT1 e TT3) são de arquitetura de informação, não de característica geracional.</p>
+        </div>
+
+        <div class="highlight-card">
+          <h4>Recomendação de Redesenho da Árvore</h4>
+          <p>Renomear "Estagiário/Aprendiz" (dentro de Senioridade) para "Nível inicial", reservando a palavra "Aprendiz" só para o tipo de contrato. Se o produto real mantiver filtros paralelos, isso deve ficar documentado como decisão consciente, e testes futuros devem ser desenhados como tarefas de faceta única.</p>
         </div>
       </section>
 
       <!-- Achados Principais -->
       <section class="case-section">
-        <h2>Achados Principais</h2>
+        <h2>Ranking de Problemas por Severidade</h2>
 
-        <table class="problems-table">
-          <thead>
-            <tr>
-              <th style="width: 15%;">Ranking</th>
-              <th style="width: 35%;">Problema</th>
-              <th style="width: 20%;">Severidade</th>
-              <th style="width: 30%;">Método que Revelou</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>1</strong></td>
-              <td>Fluxo de candidatura perde o participante ao sair para editar perfil</td>
-              <td><span class="severity-alta">Alta</span></td>
-              <td>Teste de Usabilidade</td>
-            </tr>
-            <tr>
-              <td><strong>2</strong></td>
-              <td>"Jovem Aprendiz" e "Estagiário/Aprendiz" competem semanticamente na árvore de IA</td>
-              <td><span class="severity-media">Média-alta</span></td>
-              <td>Tree Testing</td>
-            </tr>
-            <tr>
-              <td><strong>3</strong></td>
-              <td>Tarefas que exigem combinar duas facetas (área + modalidade) têm baixo sucesso em árvore texto pura</td>
-              <td><span class="severity-media">Média</span></td>
-              <td>Tree Testing</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 10%;">#</th>
+                <th style="width: 40%;">Problema</th>
+                <th style="width: 20%;">Severidade</th>
+                <th style="width: 30%;">Método que Revelou</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1</strong></td>
+                <td>Fluxo de candidatura perde o participante ao sair para editar perfil</td>
+                <td><span class="severity-alta">Alta</span></td>
+                <td>Teste de Usabilidade</td>
+              </tr>
+              <tr>
+                <td><strong>2</strong></td>
+                <td>"Jovem Aprendiz" e "Estagiário/Aprendiz" competem semanticamente na árvore de IA</td>
+                <td><span class="severity-media">Média-alta</span></td>
+                <td>Tree Testing</td>
+              </tr>
+              <tr>
+                <td><strong>3</strong></td>
+                <td>Tarefas que exigem combinar duas facetas (área + modalidade) têm baixo sucesso em árvore texto pura</td>
+                <td><span class="severity-media">Média</span></td>
+                <td>Tree Testing</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
         <!-- Key insight -->
         <div class="highlight-card">
