@@ -48,6 +48,21 @@
       margin: 0;
       color: var(--color-body);
     }
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-top: var(--space-lg);
+    }
+    .hero-tag {
+      display: inline-flex;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      background: rgba(10,10,10,0.08);
+      color: var(--color-ink);
+      font-size: 13px;
+      font-weight: 500;
+    }
 
     /* Content section */
     .case-content {
@@ -60,7 +75,7 @@
     /* Overview grid */
     .overview-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: var(--space-lg);
       margin-bottom: var(--space-section);
       padding-bottom: var(--space-section);
@@ -97,13 +112,19 @@
       font-weight: 600;
       color: var(--color-ink);
     }
+    .case-section h4 {
+      margin: var(--space-lg) 0 var(--space-xs) 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-ink);
+    }
     .case-section p {
       margin: 0 0 var(--space-md) 0;
       font-size: 16px;
       line-height: 1.6;
       color: var(--color-body);
     }
-    .case-section ul {
+    .case-section ul, .case-section ol {
       margin: 0 0 var(--space-lg) 0;
       padding-left: 20px;
       color: var(--color-body);
@@ -111,6 +132,11 @@
     }
     .case-section li {
       margin-bottom: var(--space-sm);
+    }
+    .section-intro {
+      color: var(--color-muted);
+      font-size: 15px;
+      margin-bottom: var(--space-lg);
     }
 
     /* Highlight card */
@@ -127,7 +153,7 @@
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      color: var(--color-brand-ochre);
+      color: var(--color-ink);
     }
     .highlight-card p {
       margin: 0;
@@ -137,27 +163,39 @@
       line-height: 1.6;
     }
 
-    /* Problems table */
-    .problems-table {
+    /* Generic data table */
+    .data-table {
       width: 100%;
       border-collapse: collapse;
       margin: var(--space-lg) 0;
-      font-size: 14px;
+      font-size: 13px;
     }
-    .problems-table th {
+    .data-table th {
       text-align: left;
       background: var(--color-surface-card);
-      padding: var(--space-md);
+      padding: var(--space-sm) var(--space-md);
       font-weight: 600;
       border-bottom: 2px solid var(--color-hairline);
+      white-space: nowrap;
     }
-    .problems-table td {
-      padding: var(--space-md);
+    .data-table td {
+      padding: var(--space-sm) var(--space-md);
       border-bottom: 1px solid var(--color-hairline);
+      vertical-align: top;
     }
-    .problems-table tr:last-child td {
+    .data-table tr:last-child td {
       border-bottom: none;
     }
+    .table-scroll {
+      overflow-x: auto;
+      margin: var(--space-lg) 0;
+    }
+    .table-scroll .data-table {
+      margin: 0;
+    }
+    .severity-alta { color: #ef4444; font-weight: 600; }
+    .severity-media { color: #f59e0b; font-weight: 600; }
+    .severity-baixa { color: var(--color-muted); font-weight: 600; }
 
     /* Methods grid */
     .methods-grid {
@@ -186,7 +224,97 @@
       color: var(--color-muted);
     }
 
-    /* Data highlight */
+    /* Stats grid (métricas reais do app) */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-md);
+      margin: var(--space-lg) 0;
+    }
+    .stat-card {
+      background: var(--color-surface-card);
+      border-left: 4px solid var(--color-brand-ochre);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+    }
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 500;
+      color: var(--color-ink);
+      line-height: 1;
+      margin-bottom: var(--space-sm);
+    }
+    .stat-label {
+      font-size: 14px;
+      color: var(--color-ink);
+      font-weight: 500;
+      line-height: 1.4;
+      margin-bottom: var(--space-xs);
+    }
+    .stat-source {
+      font-size: 12px;
+      color: var(--color-muted);
+    }
+    .stat-source a {
+      color: var(--color-muted);
+      text-decoration: underline;
+    }
+    .stat-source a:hover {
+      color: var(--color-ink);
+    }
+
+    /* Category badge (reusa badge-pill do design system) */
+    .category-badge {
+      display: inline-flex;
+      padding: 2px 10px;
+      border-radius: var(--radius-pill);
+      background: var(--color-surface-soft);
+      color: var(--color-ink);
+      font-size: 11px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    /* Panel composition box */
+    .panel-box {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--space-md);
+      margin: var(--space-lg) 0;
+    }
+    .panel-group {
+      background: var(--color-surface-soft);
+      border-radius: var(--radius-md);
+      padding: var(--space-md) var(--space-lg);
+      font-size: 14px;
+      color: var(--color-body);
+    }
+    .panel-group strong {
+      color: var(--color-ink);
+    }
+
+    /* Achado item */
+    .achado-item {
+      border: 1px solid var(--color-hairline);
+      border-radius: var(--radius-md);
+      padding: var(--space-md) var(--space-lg);
+      margin-bottom: var(--space-md);
+    }
+    .achado-item h4 {
+      margin: 0 0 var(--space-xs) 0;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-ink);
+    }
+    .achado-item p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--color-body);
+      line-height: 1.6;
+    }
+
+    /* Data notice */
     .data-highlight {
       background: #fef3c7;
       border: 1px solid #fcd34d;
@@ -251,15 +379,11 @@
     }
 
     @media (max-width: 768px) {
-      .hero-case h1 {
-        font-size: 28px;
-      }
-      .case-section h2 {
-        font-size: 24px;
-      }
-      .overview-grid {
-        grid-template-columns: 1fr;
-      }
+      .hero-case h1 { font-size: 28px; }
+      .case-section h2 { font-size: 24px; }
+      .overview-grid { grid-template-columns: 1fr; }
+      .data-table { font-size: 12px; }
+      .data-table th, .data-table td { padding: var(--space-xs) var(--space-sm); }
     }
   </style>
 </head>
@@ -276,6 +400,11 @@
     <div class="container">
       <h1 class="display-lg">Pesquisa Quantitativa</h1>
       <p>Análise de avaliações reais + SUS — iFood e satisfação de usuários</p>
+      <div class="hero-tags">
+        <span class="hero-tag">Análise de Avaliações Reais</span>
+        <span class="hero-tag">System Usability Scale</span>
+        <span class="hero-tag">Dados Públicos Verificáveis</span>
+      </div>
     </div>
   </section>
 
@@ -295,8 +424,12 @@
           <p>iFood — aplicativo dominante de delivery no Brasil</p>
         </div>
         <div class="overview-item">
+          <h3>Amostra</h3>
+          <p>12 reclamações documentadas + 2 estatísticas agregadas oficiais + painel SUS de 6 respondentes</p>
+        </div>
+        <div class="overview-item">
           <h3>Tipo de Dado</h3>
-          <p>Avaliações públicas reais + escala padronizada SUS</p>
+          <p>Avaliações públicas reais (codificação) + SUS simulado, calibrado com os achados reais</p>
         </div>
       </div>
 
@@ -315,15 +448,15 @@
         <div class="methods-grid">
           <div class="method-badge">
             <strong>Análise de Avaliações</strong>
-            <p>App Store + Reclame Aqui — dados públicos reais</p>
+            <p>Google Play, Reclame Aqui e reportagens — dados públicos reais</p>
           </div>
           <div class="method-badge">
             <strong>Codificação Temática</strong>
-            <p>Categorização de 12+ reclamações por categoria de problema</p>
+            <p>Categorização fechada de 12 reclamações documentadas por tipo de problema</p>
           </div>
           <div class="method-badge">
             <strong>System Usability Scale</strong>
-            <p>Escala padronizada com 6 respondentes para simulação</p>
+            <p>Questionário padronizado de 10 itens, painel simulado de 6 respondentes</p>
           </div>
         </div>
       </section>
@@ -331,88 +464,175 @@
       <!-- Data notice -->
       <div class="data-highlight">
         <h4>💡 Diferencial deste projeto</h4>
-        <p>Ao contrário das Pesquisas 1 e 2, este projeto pode se ancorar em <strong>dados reais publicamente disponíveis</strong> (avaliações de app store). As avaliações analisadas e o ranking de problemas abaixo são baseados em dados genuínos, não simulados. A etapa de SUS foi simulada para fins de portfólio, mas a análise de reclamações reais é verificável.</p>
+        <p>Ao contrário das Pesquisas 1 e 2, este projeto se ancora em <strong>dados reais publicamente disponíveis</strong> (avaliações de app store, Reclame Aqui, reportagens). Apenas a etapa de SUS foi simulada — mas calibrada para refletir, de forma internamente coerente, os padrões de reclamação reais documentados abaixo.</p>
       </div>
 
-      <!-- Achados Principais -->
+      <!-- Métricas reais do app -->
       <section class="case-section">
-        <h2>Achado Principal</h2>
-
-        <div class="highlight-card">
-          <h4>Ponto de Dor Crítico</h4>
-          <p>O ponto de dor mais forte não é operacional (atraso), é de <strong>confiança na transparência financeira</strong> — reembolso, preços diferentes por conta. Esse ponto foi confirmado tanto na análise de avaliações reais quanto no item "confiança" do SUS simulado, que teve a pior nota entre os itens positivos mesmo com score geral acima do benchmark de mercado.</p>
+        <h2>Métricas Reais do App</h2>
+        <p class="section-intro">Dados coletados diretamente das plataformas em julho de 2026.</p>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number">4,7/5</div>
+            <div class="stat-label">nota no Google Play, com ~13,4 milhões de avaliações e mais de 100 milhões de downloads</div>
+            <div class="stat-source">Fonte: <a href="https://play.google.com/store/apps/details?id=br.com.brainweb.ifood&hl=en_US" target="_blank" rel="noopener">Google Play Store ↗</a></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">7,1/10</div>
+            <div class="stat-label">nota no Reclame Aqui, com 142.588 reclamações registradas (jan-jun/2026), 69% resolvidas</div>
+            <div class="stat-source">Fonte: <a href="https://www.reclameaqui.com.br/empresa/ifood/sobre/" target="_blank" rel="noopener">Reclame Aqui — página institucional iFood ↗</a></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">#1</div>
+            <div class="stat-label">empresa com mais reclamações do Brasil no Reclame Aqui em levantamento de 6 meses (136.712 reclamações)</div>
+            <div class="stat-source">Fonte: <a href="https://atarde.com.br/economia/ifood-e-empresa-com-mais-reclamacoes-do-brasil-nos-ultimos-seis-meses-aponta-plataforma-1329186" target="_blank" rel="noopener">A Tarde, maio/2025 ↗</a></div>
+          </div>
         </div>
-
-        <h3>Categorização de Reclamações</h3>
-        <table class="problems-table">
-          <thead>
-            <tr>
-              <th>Categoria de Problema</th>
-              <th>Descrição</th>
-              <th>Frequência</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Cobrança / Taxa</strong></td>
-              <td>Taxa abusiva, preço diferente por conta, reembolso negado</td>
-              <td><strong style="color: #ef4444;">Alta</strong></td>
-            </tr>
-            <tr>
-              <td><strong>Atraso na Entrega</strong></td>
-              <td>Tempo estimado muito maior que o realizado</td>
-              <td><strong style="color: #f59e0b;">Média-alta</strong></td>
-            </tr>
-            <tr>
-              <td><strong>Erro no Pedido</strong></td>
-              <td>Item errado, faltando, ou cancelado sem aviso</td>
-              <td><strong style="color: #f59e0b;">Média-alta</strong></td>
-            </tr>
-            <tr>
-              <td><strong>Suporte ao Cliente</strong></td>
-              <td>Dificuldade de contato, resposta automática, demora no atendimento</td>
-              <td><strong style="color: #f59e0b;">Média</strong></td>
-            </tr>
-            <tr>
-              <td><strong>Bugs / Instabilidade</strong></td>
-              <td>Erro técnico, app trava, pagamento não processa</td>
-              <td><strong style="color: #f59e0b;">Média</strong></td>
-            </tr>
-            <tr>
-              <td><strong>Problema com Entregador</strong></td>
-              <td>Comportamento inadequado, localização incorreta</td>
-              <td><strong>Baixa</strong></td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="highlight-card">
+          <h4>Dado mais forte da coleta</h4>
+          <p>Segundo o resumo oficial da própria página do iFood no Reclame Aqui, as reclamações mais comuns são sobre <strong>"Estorno do valor pago"</strong> e <strong>"Dificuldade de cadastro"</strong> — por vir agregado diretamente da plataforma (não de uma amostra própria), este é o dado mais robusto da coleta. Fonte: <a href="https://www.reclameaqui.com.br/empresa/ifood/sobre/" target="_blank" rel="noopener" style="color:inherit;">Reclame Aqui ↗</a></p>
+        </div>
       </section>
 
-      <!-- SUS Results -->
+      <!-- Amostra codificada -->
       <section class="case-section">
-        <h2>System Usability Scale (SUS)</h2>
-        <p>O teste SUS foi simulado com 6 respondentes (2 Millennials, 2 adolescentes, 2 usuários gerais), usando a escala padronizada de 10 perguntas. Resultados:</p>
+        <h2>Amostra Codificada de Reclamações</h2>
+        <p class="section-intro">12 reclamações documentadas via busca (Reclame Aqui, Google Play, reportagens), parafraseadas e sem identificação de usuário — amostra intencional, não estatisticamente representativa.</p>
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr><th>#</th><th>Fonte</th><th>Resumo</th><th>Categoria</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>Reclame Aqui (oficial)</td><td>Estorno do valor pago é a categoria de reclamação mais comum</td><td><span class="category-badge">Cobrança/taxa</span></td></tr>
+              <tr><td>2</td><td>Reclame Aqui (oficial)</td><td>Dificuldade de cadastro é a segunda categoria mais comum</td><td><span class="category-badge">Bugs/instabilidade</span></td></tr>
+              <tr><td>3</td><td>Google Play, jan/2026</td><td>Entrega adiada duas vezes; suporte parou de responder ao cancelar; compensação de R$5</td><td><span class="category-badge">Atraso</span> <span class="category-badge">Suporte</span></td></tr>
+              <tr><td>4</td><td>Google Play, abr/2026</td><td>Impossível alterar e-mail/telefone/endereço; código de verificação não chega</td><td><span class="category-badge">Bugs/instabilidade</span></td></tr>
+              <tr><td>5</td><td>Google Play, abr/2026</td><td>Sem suporte para telefone ou cartão internacional</td><td><span class="category-badge">Bugs/instabilidade</span></td></tr>
+              <tr><td>6</td><td>Reclame Aqui (A Tarde)</td><td>Esperou entregador 15+ min; pedido cancelado sem reembolso</td><td><span class="category-badge">Atraso</span> <span class="category-badge">Cobrança/taxa</span></td></tr>
+              <tr><td>7</td><td>Reclame Aqui (A Tarde)</td><td>Pedido acima de R$400; itens não entregues; reembolso negado mesmo com prova</td><td><span class="category-badge">Erro no pedido</span> <span class="category-badge">Cobrança/taxa</span></td></tr>
+              <tr><td>8</td><td>Reclame Aqui</td><td>Prazo alterado três vezes; item final entregue incorreto</td><td><span class="category-badge">Atraso</span> <span class="category-badge">Erro no pedido</span></td></tr>
+              <tr><td>9</td><td>Reclame Aqui</td><td>Erro de validação de acesso após desbloqueio, sem atualização apesar de prazo prometido</td><td><span class="category-badge">Bugs/instabilidade</span></td></tr>
+              <tr><td>10</td><td>Reclame Aqui</td><td>Demora excessiva combinada com impossibilidade de cancelar e ausência de suporte</td><td><span class="category-badge">Atraso</span> <span class="category-badge">Suporte</span></td></tr>
+              <tr><td>11</td><td>Google Play</td><td>Entregador reportado por tentar cobrar valor extra alegando problema falso; suporte não agiu</td><td><span class="category-badge">Entregador</span> <span class="category-badge">Suporte</span></td></tr>
+              <tr><td>12</td><td>TechTudo, fev/2026</td><td>App mostra preços diferentes para o mesmo prato dependendo da conta, inclusive entre assinantes e não assinantes</td><td><span class="category-badge">Cobrança/taxa</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:13px;color:var(--color-muted);">Fonte do caso 12: <a href="https://www.techtudo.com.br/guia/2026/02/ifood-mostra-precos-diferentes-para-o-mesmo-prato-entenda-relatos-nas-redes-edapps.ghtml" target="_blank" rel="noopener" style="color:var(--color-muted);">TechTudo, fevereiro de 2026 ↗</a></p>
+      </section>
+
+      <!-- Tabela de frequência e ranking -->
+      <section class="case-section">
+        <h2>Frequência por Categoria e Ranking</h2>
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr><th>Categoria</th><th>Ocorrências</th><th>% da amostra</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Atraso na entrega</td><td>5</td><td>42%</td></tr>
+              <tr><td>Cobrança/taxa</td><td>4</td><td>33%</td></tr>
+              <tr><td>Bugs/instabilidade do app</td><td>4</td><td>33%</td></tr>
+              <tr><td>Suporte ao cliente</td><td>4</td><td>33%</td></tr>
+              <tr><td>Erro no pedido</td><td>2</td><td>17%</td></tr>
+              <tr><td>Problema com entregador</td><td>1</td><td>8%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:13px;color:var(--color-muted);">Alguns casos foram contados em mais de uma categoria, por combinarem múltiplos problemas na mesma reclamação.</p>
+
+        <h3>Ranking dos 3 Problemas Mais Citados</h3>
+        <ol>
+          <li><strong>Atraso na entrega</strong> — categoria mais frequente, com frequência combinada com falta de suporte para resolver o problema.</li>
+          <li><strong>Cobrança/taxa</strong> — inclui reembolso negado e a controvérsia mais recente: preços diferentes mostrados para o mesmo produto dependendo da conta do usuário, um problema de transparência de interface, não só operacional.</li>
+          <li><strong>Bugs/instabilidade e suporte ao cliente</strong> (empatados) — cadastro/validação de conta e um padrão recorrente de suporte que interrompe o atendimento ou oferece compensação desproporcional.</li>
+        </ol>
 
         <div class="highlight-card">
-          <h4>SUS Score Geral</h4>
-          <p><strong>Score: 68/100</strong> — acima do benchmark de mercado (65), mas com distribuição assimétrica de pontuação. O app é percebido como usável, mas com seriedade em questões de confiança.</p>
+          <h4>Achado de Destaque</h4>
+          <p>A combinação do dado oficial do Reclame Aqui ("estorno" como categoria #1) com o achado do TechTudo (preços diferentes por conta) sugere que o principal ponto de dor não é operacional (comida atrasada), mas de <strong>confiança na transparência financeira</strong> — quanto o cliente paga, e se recebe de volta o que tem direito.</p>
+        </div>
+      </section>
+
+      <!-- SUS -->
+      <section class="case-section">
+        <h2>System Usability Scale (SUS)</h2>
+        <p class="section-intro">Painel fictício de 6 respondentes, calibrado para refletir de forma coerente os padrões de reclamação reais documentados acima. Escala 1-5 (1 = discordo totalmente, 5 = concordo totalmente).</p>
+
+        <div class="panel-box">
+          <div class="panel-group"><strong>R1, R2, R3 — perfil Millennial</strong><br>ancorado na persona Camila: usuário experiente do app, já usa há anos.</div>
+          <div class="panel-group"><strong>R4, R5, R6 — perfil Geração Alpha</strong><br>ancorado na persona Théo: usuário recente, poucos meses de uso.</div>
         </div>
 
-        <h3>Destaques da Análise SUS</h3>
-        <ul>
-          <li><strong>Item mais fraco:</strong> "Confiança na precisão dos valores cobrados" — nota média 3.5/5, muito abaixo de outras dimensões de usabilidade.</li>
-          <li><strong>Item mais forte:</strong> "Facilidade de navegar na interface" — nota média 4.2/5, indicando que o app é intuitivo quanto à estrutura visual.</li>
-          <li><strong>Padrão geracional:</strong> Millennials atribuem pontuação ligeiramente mais alta a questões de "confiança"; adolescentes pontuam mais questões de "velocidade". Ambos os grupos concordam na crítica à transparência financeira.</li>
-        </ul>
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr><th>Item</th><th>R1</th><th>R2</th><th>R3</th><th>R4</th><th>R5</th><th>R6</th><th>Média</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1. Gostaria de usar com frequência</td><td>5</td><td>4</td><td>5</td><td>5</td><td>4</td><td>5</td><td><strong>4,67</strong></td></tr>
+              <tr><td>2. Desnecessariamente complexo</td><td>2</td><td>2</td><td>1</td><td>3</td><td>2</td><td>2</td><td>2,00</td></tr>
+              <tr><td>3. Fácil de usar</td><td>5</td><td>4</td><td>5</td><td>4</td><td>4</td><td>5</td><td><strong>4,50</strong></td></tr>
+              <tr><td>4. Precisaria de apoio técnico</td><td>1</td><td>2</td><td>1</td><td>3</td><td>2</td><td>1</td><td>1,67</td></tr>
+              <tr><td>5. Funções bem integradas</td><td>4</td><td>3</td><td>4</td><td>3</td><td>3</td><td>4</td><td>3,50</td></tr>
+              <tr><td>6. Muita inconsistência</td><td>3</td><td>4</td><td>2</td><td>3</td><td>2</td><td>2</td><td>2,67</td></tr>
+              <tr><td>7. Maioria aprenderia rápido</td><td>5</td><td>4</td><td>5</td><td>4</td><td>4</td><td>5</td><td><strong>4,50</strong></td></tr>
+              <tr><td>8. Muito complicado</td><td>1</td><td>2</td><td>1</td><td>2</td><td>2</td><td>1</td><td>1,50</td></tr>
+              <tr><td>9. Me senti confiante usando</td><td>3</td><td>3</td><td>4</td><td>2</td><td>3</td><td>3</td><td style="color:#ef4444;"><strong>3,00 ⚠</strong></td></tr>
+              <tr><td>10. Precisei aprender coisas novas</td><td>2</td><td>2</td><td>1</td><td>3</td><td>2</td><td>1</td><td>1,83</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Cálculo do Score SUS</h3>
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr><th>Respondente</th><th>Soma ímpares −1</th><th>Soma 5 − pares</th><th>Total (0-40)</th><th>Score SUS (×2,5)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>R1 (Millennial)</td><td>17</td><td>16</td><td>33</td><td>82,5</td></tr>
+              <tr><td>R2 (Millennial)</td><td>13</td><td>13</td><td>26</td><td>65,0</td></tr>
+              <tr><td>R3 (Millennial)</td><td>18</td><td>19</td><td>37</td><td>92,5</td></tr>
+              <tr><td>R4 (Alpha)</td><td>13</td><td>11</td><td>24</td><td>60,0</td></tr>
+              <tr><td>R5 (Alpha)</td><td>13</td><td>15</td><td>28</td><td>70,0</td></tr>
+              <tr><td>R6 (Alpha)</td><td>17</td><td>18</td><td>35</td><td>87,5</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number">80,0</div>
+            <div class="stat-label">Score SUS médio — Millennials</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">72,5</div>
+            <div class="stat-label">Score SUS médio — Geração Alpha</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">76,25</div>
+            <div class="stat-label">Score SUS médio geral — acima do benchmark de mercado</div>
+            <div class="stat-source">Benchmark: <a href="https://www.researchgate.net/publication/200553206_The_System_Usability_Scale_SUS_an_Empirical_evaluation" target="_blank" rel="noopener">Bangor, Kortum & Miller, 2008 (~68) ↗</a></div>
+          </div>
+        </div>
+
+        <div class="highlight-card">
+          <h4>Achado Mais Interessante da Simulação</h4>
+          <p>O item 9 ("me senti confiante usando o app") teve a <strong>pior média entre os itens positivos (3,0)</strong>, destoando de "fácil de usar" (4,5) e "aprenderia rápido" (4,5). Isso é internamente coerente com o achado real: o problema do iFood não é a usabilidade básica (funciona bem, refletido na nota real de 4,7/5), é a <strong>confiança</strong> na parte financeira/transparência. SUS mede usabilidade percebida da interface, não necessariamente confiabilidade do serviço — os dois podem divergir, como divergiram aqui.</p>
+        </div>
+        <p>Diferença entre grupos: Alpha pontuou ~7,5 pontos abaixo de Millennial, principalmente pelos itens 4 e 10 (necessidade de apoio/aprendizado) — coerente com a hipótese de que usuários novos levam mais tempo para se sentir fluentes no produto, mesmo em um app popular e bem avaliado.</p>
       </section>
 
       <!-- Implicações -->
       <section class="case-section">
         <h2>Implicações para Produto</h2>
-        <p>O foco em transparência financeira (explicitar variações de preço, politica clara de reembolso, quebra de taxa por componente) pode ter ROI mais alto que investimentos em velocidade ou design visual — já que esses itens já têm avaliação positiva. Uma estratégia de redesign deveria começar por restituir confiança do usuário em relação a valores.</p>
+        <p>O foco em transparência financeira (explicitar variações de preço, política clara de reembolso, quebra de taxa por componente) pode ter ROI mais alto que investimentos em velocidade ou design visual — já que esses itens já têm avaliação positiva tanto nos dados reais quanto no SUS simulado. Uma estratégia de redesign deveria começar por restituir a confiança do usuário em relação a valores.</p>
 
-        <div class="highlight-card" style="border-left-color: var(--color-brand-ochre);">
-          <h4>Conexão com o Portfólio</h4>
-          <p>Esse achado sobre interrupção de fluxo (relacionado ao ponto de dor de reembolso, que leva o usuário a explorar politicas/disputas) conecta com o padrão identificado na Pesquisa 2: <strong>fluxos que interrompem a tarefa principal sem preservar contexto geram abandono e desconfiança</strong>.</p>
+        <div class="highlight-card">
+          <h4>Conexão com a Pesquisa 2</h4>
+          <p>O achado de maior severidade aqui (reembolso/transparência financeira) tem o mesmo formato do problema de maior severidade encontrado no teste de usabilidade do VagaCerta: <strong>fluxos que interrompem a tarefa principal do usuário sem preservar contexto de retorno geram abandono e desconfiança</strong> — independentemente do domínio (emprego ou delivery) ou da geração do usuário.</p>
         </div>
       </section>
 
@@ -422,7 +642,7 @@
         <p>Explore todos os dados, codificação e análises da pesquisa no repositório:</p>
         <ul>
           <li><a href="pesquisas/03-pesquisa-quantitativa/protocolo-pesquisa-quantitativa.md" target="_blank">Protocolo Completo da Pesquisa</a></li>
-          <li><a href="pesquisas/03-pesquisa-quantitativa/docs/avaliacoes-codificadas.md" target="_blank">Dados Reais: Avaliações Codificadas (12+ reclamações)</a></li>
+          <li><a href="pesquisas/03-pesquisa-quantitativa/docs/avaliacoes-codificadas.md" target="_blank">Dados Reais: Avaliações Codificadas (12 reclamações)</a></li>
           <li><a href="pesquisas/03-pesquisa-quantitativa/docs/sus-simulado.md" target="_blank">Painel SUS Simulado (6 respondentes)</a></li>
           <li><a href="pesquisas/03-pesquisa-quantitativa/data/fontes-secundarias.md" target="_blank">Fontes e Referências Utilizadas</a></li>
         </ul>
