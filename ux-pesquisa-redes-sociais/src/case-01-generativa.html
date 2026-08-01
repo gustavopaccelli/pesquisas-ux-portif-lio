@@ -27,20 +27,6 @@
       color: var(--color-ink);
       text-decoration: none;
     }
-    .breadcrumb {
-      display: flex;
-      gap: var(--space-sm);
-      align-items: center;
-      font-size: 14px;
-      color: var(--color-muted);
-    }
-    .breadcrumb a {
-      color: var(--color-ink);
-      text-decoration: none;
-    }
-    .breadcrumb a:hover {
-      text-decoration: underline;
-    }
 
     /* Hero section */
     .hero-case {
@@ -62,6 +48,21 @@
       margin: 0;
       opacity: 0.95;
     }
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-top: var(--space-lg);
+    }
+    .hero-tag {
+      display: inline-flex;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      background: rgba(255,255,255,0.2);
+      color: var(--color-on-primary);
+      font-size: 13px;
+      font-weight: 500;
+    }
 
     /* Content section */
     .case-content {
@@ -74,7 +75,7 @@
     /* Overview grid */
     .overview-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: var(--space-lg);
       margin-bottom: var(--space-section);
       padding-bottom: var(--space-section);
@@ -117,7 +118,7 @@
       line-height: 1.6;
       color: var(--color-body);
     }
-    .case-section ul {
+    .case-section ul, .case-section ol {
       margin: 0 0 var(--space-lg) 0;
       padding-left: 20px;
       color: var(--color-body);
@@ -125,6 +126,11 @@
     }
     .case-section li {
       margin-bottom: var(--space-sm);
+    }
+    .section-intro {
+      color: var(--color-muted);
+      font-size: 15px;
+      margin-bottom: var(--space-lg);
     }
 
     /* Highlight card */
@@ -178,6 +184,246 @@
       color: var(--color-muted);
     }
 
+    /* Stats grid (dados de mercado) */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-md);
+      margin: var(--space-lg) 0;
+    }
+    .stat-card {
+      background: var(--color-surface-card);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+    }
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 40px;
+      font-weight: 500;
+      color: var(--color-brand-pink);
+      line-height: 1;
+      margin-bottom: var(--space-sm);
+    }
+    .stat-label {
+      font-size: 14px;
+      color: var(--color-ink);
+      font-weight: 500;
+      line-height: 1.4;
+      margin-bottom: var(--space-xs);
+    }
+    .stat-source {
+      font-size: 12px;
+      color: var(--color-muted);
+    }
+
+    /* Persona cards */
+    .persona-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: var(--space-lg);
+      margin: var(--space-lg) 0;
+    }
+    .persona-card {
+      border: 1px solid var(--color-hairline);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      background: var(--color-canvas);
+    }
+    .persona-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+    .persona-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-full);
+      background: var(--color-brand-pink);
+      color: var(--color-on-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+    .persona-header h3 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-ink);
+    }
+    .persona-header span {
+      display: block;
+      font-size: 13px;
+      color: var(--color-muted);
+      margin-top: 2px;
+    }
+    .persona-quote {
+      background: var(--color-surface-soft);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      font-size: 14px;
+      font-style: italic;
+      color: var(--color-body);
+      margin: var(--space-md) 0;
+    }
+    .persona-card ul {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 14px;
+    }
+    .persona-card li {
+      margin-bottom: var(--space-xs);
+    }
+
+    /* Diary study entries */
+    .diary-columns {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: var(--space-xl);
+      margin: var(--space-lg) 0;
+    }
+    .diary-column h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-ink);
+      margin: 0 0 var(--space-md) 0;
+      padding-bottom: var(--space-sm);
+      border-bottom: 2px solid var(--color-brand-pink);
+    }
+    .diary-entry {
+      border-left: 3px solid var(--color-hairline);
+      padding: var(--space-sm) 0 var(--space-sm) var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+    .diary-entry-meta {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-brand-pink);
+      margin-bottom: var(--space-xs);
+    }
+    .diary-entry p {
+      margin: 0 0 var(--space-xs) 0;
+      font-size: 14px;
+      color: var(--color-body);
+      line-height: 1.5;
+    }
+    .diary-entry .sentimento {
+      font-size: 13px;
+      color: var(--color-muted);
+      font-style: italic;
+    }
+    .diary-debrief {
+      background: var(--color-surface-soft);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      margin-top: var(--space-md);
+      font-size: 14px;
+      color: var(--color-body);
+    }
+    .diary-debrief strong {
+      color: var(--color-ink);
+    }
+
+    /* Journey map table */
+    .journey-map-block {
+      margin-bottom: var(--space-xl);
+    }
+    .journey-map-block h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-ink);
+      margin: 0 0 var(--space-xs) 0;
+    }
+    .journey-map-block .episodio {
+      font-size: 13px;
+      color: var(--color-muted);
+      margin-bottom: var(--space-md);
+    }
+    .journey-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-bottom: var(--space-md);
+    }
+    .journey-table th {
+      text-align: left;
+      background: var(--color-surface-card);
+      padding: var(--space-sm) var(--space-md);
+      font-weight: 600;
+      border-bottom: 2px solid var(--color-hairline);
+      white-space: nowrap;
+    }
+    .journey-table td {
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: 1px solid var(--color-hairline);
+      vertical-align: top;
+    }
+    .journey-table tr:last-child td {
+      border-bottom: none;
+    }
+    .journey-reading {
+      font-size: 14px;
+      color: var(--color-body);
+      line-height: 1.6;
+      background: var(--color-surface-soft);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+    }
+
+    /* Insight statements */
+    .insight-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      margin: var(--space-lg) 0;
+    }
+    .insight-item {
+      border: 1px solid var(--color-hairline);
+      border-radius: var(--radius-md);
+      padding: var(--space-md) var(--space-lg);
+    }
+    .insight-item-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      margin-bottom: var(--space-xs);
+    }
+    .insight-code {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-brand-pink);
+    }
+    .confidence-badge {
+      display: inline-flex;
+      padding: 3px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+    .confidence-alta { background: #dcfce7; color: #166534; }
+    .confidence-media { background: #fef3c7; color: #92400e; }
+    .confidence-baixa { background: #f0f0f0; color: var(--color-muted); }
+    .insight-item p {
+      margin: 0;
+      font-size: 15px;
+      color: var(--color-body);
+      line-height: 1.55;
+    }
+    .insight-item p strong {
+      color: var(--color-ink);
+    }
+
     /* Links section */
     .documentation-links {
       background: var(--color-surface-soft);
@@ -223,15 +469,11 @@
     }
 
     @media (max-width: 768px) {
-      .hero-case h1 {
-        font-size: 28px;
-      }
-      .case-section h2 {
-        font-size: 24px;
-      }
-      .overview-grid {
-        grid-template-columns: 1fr;
-      }
+      .hero-case h1 { font-size: 28px; }
+      .case-section h2 { font-size: 24px; }
+      .overview-grid { grid-template-columns: 1fr; }
+      .journey-table { font-size: 12px; }
+      .journey-table th, .journey-table td { padding: var(--space-xs) var(--space-sm); }
     }
   </style>
 </head>
@@ -248,6 +490,11 @@
     <div class="container">
       <h1 class="display-lg">Pesquisa Generativa</h1>
       <p>Comportamento em redes sociais: diferenças geracionais entre Millennials e Geração Alpha</p>
+      <div class="hero-tags">
+        <span class="hero-tag">Diary Study</span>
+        <span class="hero-tag">Journey Mapping</span>
+        <span class="hero-tag">Dados Secundários Reais</span>
+      </div>
     </div>
   </section>
 
@@ -264,18 +511,27 @@
         </div>
         <div class="overview-item">
           <h3>Públicos</h3>
-          <p>Millennials (30-44 anos) e adolescentes (13-17 anos)</p>
+          <p>Millennials (30-44 anos) e adolescentes (13-17 anos, usuários independentes)</p>
         </div>
         <div class="overview-item">
-          <h3>Contexto</h3>
-          <p>Consumo, tomada de decisão e socialização em ambientes digitais</p>
+          <h3>Duração do campo</h3>
+          <p>Diary Study de 7 a 10 dias por persona, com journey map do episódio mais revelador</p>
+        </div>
+        <div class="overview-item">
+          <h3>Natureza dos dados</h3>
+          <p>Diários e journey maps simulados, triangulados com dados de mercado reais e citados</p>
         </div>
       </div>
 
       <!-- Pergunta de Pesquisa -->
       <section class="case-section">
-        <h2>Pergunta Central</h2>
+        <h2>Pergunta Central e Hipóteses</h2>
         <p>Como o comportamento de consumo em redes sociais difere estruturalmente entre Millennials e adolescentes da Geração Alpha, e que tendências emergentes isso revela?</p>
+        <ul>
+          <li><strong>H1:</strong> o motivo de uso difere estruturalmente entre gerações — consumo/decisão de compra rotinizada (Millennials) vs. socialização identitária (Alpha).</li>
+          <li><strong>H2:</strong> a relação com autonomia e risco percebido no ambiente digital difere entre gerações.</li>
+          <li><strong>H3:</strong> existe uma mudança de comportamento em curso na geração mais jovem, possivelmente ligada ao debate regulatório recente (ECA Digital) no Brasil.</li>
+        </ul>
       </section>
 
       <!-- Métodos -->
@@ -284,40 +540,259 @@
         <div class="methods-grid">
           <div class="method-badge">
             <strong>Diary Study</strong>
-            <p>Autorrrelato de comportamentos e decisões ao longo de 7 dias</p>
+            <p>Autorrelato estruturado de comportamentos e decisões, 7-10 entradas por persona</p>
           </div>
           <div class="method-badge">
             <strong>Journey Mapping</strong>
-            <p>Mapeamento de jornadas emocionais e de decisão</p>
+            <p>Mapeamento em 5 etapas (gatilho → pós-decisão) do episódio mais revelador de cada diário</p>
           </div>
           <div class="method-badge">
             <strong>Dados Secundários</strong>
-            <p>Triangulação com pesquisas de mercado reais (TIC Kids, We Are Social)</p>
+            <p>Triangulação com TIC Kids Online Brasil, We Are Social, mLabs/Conversion, Opinion Box</p>
           </div>
         </div>
       </section>
 
-      <!-- Achado Principal -->
+      <!-- Dados de mercado -->
       <section class="case-section">
-        <h2>Achado Principal</h2>
-        <div class="highlight-card">
-          <h4>Insight mais importante</h4>
-          <p>O "funil de decisão" não é o mesmo formato para as duas gerações. Millennials passam por uma etapa de avaliação deliberada com busca por prova social, enquanto adolescentes tomam decisões de forma mais emocional e rápida.</p>
+        <h2>Dados de Mercado que Fundamentam as Personas</h2>
+        <p class="section-intro">Cada traço das personas abaixo é rastreável a um dado real de pesquisas de mercado ou acadêmicas — não são hipóteses soltas. Fontes completas em <code>data/fontes-secundarias.md</code>.</p>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number">91%</div>
+            <div class="stat-label">dos smartphones brasileiros têm Instagram instalado, sem diferença relevante por idade</div>
+            <div class="stat-source">Panorama Mobile Time / Opinion Box, 2025</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">53%</div>
+            <div class="stat-label">dos adolescentes de 9-17 anos abrem o WhatsApp "várias vezes ao dia" — maior frequência entre todos os apps</div>
+            <div class="stat-source">TIC Kids Online Brasil 2025</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">72% <span style="font-size:20px;color:var(--color-muted);">vs 57%</span></div>
+            <div class="stat-label">adolescentes que se autoavaliam autônomos online vs. responsáveis que concordam</div>
+            <div class="stat-source">TIC Kids Online Brasil 2025</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">30%</div>
+            <div class="stat-label">dos usuários de 9-17 anos já tiveram contato online com desconhecidos</div>
+            <div class="stat-source">TIC Kids Online Brasil 2025</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">58%</div>
+            <div class="stat-label">dos Millennials confiam mais em recomendações de IA do que em pessoas próximas ao pesquisar compras</div>
+            <div class="stat-source">mLabs/Conversion — "A Nova Jornada de Compra", 2025</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">70,4%</div>
+            <div class="stat-label">dos brasileiros usam redes sociais (~150 milhões de pessoas), tempo médio de 1h27 no Instagram</div>
+            <div class="stat-source">We Are Social/Meltwater — Digital 2026: Brazil</div>
+          </div>
         </div>
-        <h3>Outros Insights-Chave</h3>
-        <ul>
-          <li><strong>Prova social:</strong> Para Millennials, recomendações de conhecidos pesam mais do que anúncios diretos (~58% confiam mais em recomendações que em publicidade).</li>
-          <li><strong>Tensão emocional:</strong> Para adolescentes, o maior ponto de tensão é pós-decisão (checagem de curtidas/comentários), não pré-decisão.</li>
-          <li><strong>Autonomia digital:</strong> Contato com desconhecidos é normalizado na geração mais jovem (30% dos 9-17 anos tiveram esse tipo de contato), com divergência entre autopercepção dos adolescentes e percepção dos responsáveis.</li>
-          <li><strong>Eixo de decisão:</strong> Decisão de compra pode não ser um eixo válido para comparar as gerações — para adolescentes, a decisão natural é sobre participação e identidade, não consumo.</li>
-          <li><strong>Uso automático:</strong> Ambas as gerações têm uso "no piloto automático", mas em contextos diferentes (Millennials à noite; adolescentes em multitasking simultâneo).</li>
-        </ul>
+      </section>
+
+      <!-- Personas -->
+      <section class="case-section">
+        <h2>Personas</h2>
+        <p class="section-intro">Personas fictícias/compostas construídas a partir dos padrões de mercado acima — ancoram os artefatos de Diary Study e Journey Mapping abaixo.</p>
+        <div class="persona-grid">
+          <div class="persona-card">
+            <div class="persona-header">
+              <div class="persona-avatar">CA</div>
+              <div>
+                <h3>Camila Andrade, 34</h3>
+                <span>Analista de RH · Belo Horizonte, MG</span>
+              </div>
+            </div>
+            <p style="font-size:14px;">Uso de redes sociais consolidado e diário — não é "early adopter" nem resistente à tecnologia.</p>
+            <div class="persona-quote">"Eu não entro no Instagram pra descobrir coisa nova, entro porque já é automático. Mas confesso que já comprei coisa que vi lá sem nem pesquisar direito depois."</div>
+            <ul>
+              <li>Instagram diário como "parte da rotina"; Facebook para grupos de bairro/condomínio</li>
+              <li>Pesquisa produtos a partir do que vê no Instagram antes de comprar</li>
+              <li>Valoriza recomendação e prova social de conhecidos acima de anúncios</li>
+            </ul>
+          </div>
+          <div class="persona-card">
+            <div class="persona-header">
+              <div class="persona-avatar">TF</div>
+              <div>
+                <h3>Théo Ferreira, 15</h3>
+                <span>Estudante, 9º ano · Uberlândia, MG</span>
+              </div>
+            </div>
+            <p style="font-size:14px;">Usuário autônomo no dia a dia, ainda dentro da faixa etária do debate público sobre proteção digital de menores no Brasil.</p>
+            <div class="persona-quote">"Eu sei me cuidar sozinho online, não preciso que fiquem checando o que eu vejo. Mas às vezes rola um perfil estranho comentando e eu só ignoro, nem conto pra ninguém."</div>
+            <ul>
+              <li>WhatsApp é o app mais aberto por frequência; Instagram e TikTok diários</li>
+              <li>Usa redes sociais primariamente por pertencimento social e identidade, não consumo</li>
+              <li>Interessado em criadores "parecidos com ele", mais que celebridades tradicionais</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Diary Study -->
+      <section class="case-section">
+        <h2>Diary Study — Trechos Selecionados</h2>
+        <p class="section-intro">Amostra de entradas representativas de cada diário simulado (7-10 dias de período). Artefato simulado, ancorado nos dados de mercado citados.</p>
+        <div class="diary-columns">
+          <div class="diary-column">
+            <h4>Camila (Millennial)</h4>
+            <div class="diary-entry">
+              <div class="diary-entry-meta">Dia 3, 19h50 · Instagram</div>
+              <p>Vê anúncio patrocinado de sérum facial nos stories de uma amiga. Salva o post para pesquisar depois.</p>
+              <div class="sentimento">Sentimento: curiosa</div>
+            </div>
+            <div class="diary-entry">
+              <div class="diary-entry-meta">Dia 4, 21h30 · Instagram</div>
+              <p>Vê comentário de uma conhecida recomendando o produto salvo. Compra o sérum pelo link da bio.</p>
+              <div class="sentimento">Sentimento: satisfeita, "decisão segura"</div>
+            </div>
+            <div class="diary-entry">
+              <div class="diary-entry-meta">Dia 8, 22h15 · Instagram</div>
+              <p>Fica "só rolando" o feed por quase 40 minutos, sem intenção clara, antes de dormir.</p>
+              <div class="sentimento">Sentimento: cansada, "um pouco culpada"</div>
+            </div>
+            <div class="diary-entry">
+              <div class="diary-entry-meta">Dia 10, 08h20 · Instagram</div>
+              <p>Vê story de promoção por tempo limitado de uma marca que segue. Compra por medo de perder a promoção.</p>
+              <div class="sentimento">Sentimento: "um pouco impulsiva, reconheceu isso na hora"</div>
+            </div>
+            <div class="diary-debrief">
+              <strong>Debrief:</strong> uso misto entre intencional (pesquisa de compra deliberada) e piloto automático (à noite). A compra do Dia 4 mostra prova social por conhecido como fator decisivo; a do Dia 10 sugere um segundo gatilho, por urgência/escassez.
+            </div>
+          </div>
+          <div class="diary-column">
+            <h4>Théo (Geração Alpha)</h4>
+            <div class="diary-entry">
+              <div class="diary-entry-meta">Dia 2, 20h10 · TikTok</div>
+              <p>Grava e posta vídeo participando de um trend visto no dia anterior. Manda para o grupo de amigos ver.</p>
+              <div class="sentimento">Sentimento: ansioso esperando reação, depois animado</div>
+            </div>
+            <div class="diary-entry">
+              <div class="diary-entry-meta">Dia 4, 21h00 · WhatsApp</div>
+              <p>Uma pessoa desconhecida entra em um grupo de jogo online e manda mensagem direta. Ignora e não conta pra ninguém.</p>
+              <div class="sentimento">Sentimento: "estranho, mas não dei bola"</div>
+            </div>
+            <div class="diary-entry">
+              <div class="diary-entry-meta">Dia 5, 19h20 · Instagram</div>
+              <p>Checa curtidas/comentários do vídeo postado várias vezes ao longo da noite.</p>
+              <div class="sentimento">Sentimento: ansiedade leve entre checagens, alívio com reação positiva</div>
+            </div>
+            <div class="diary-entry">
+              <div class="diary-entry-meta">Dia 7, 15h00 · WhatsApp + TikTok</div>
+              <p>Alterna entre conversar no grupo e assistir vídeos simultaneamente, em um sábado à tarde.</p>
+              <div class="sentimento">Sentimento: relaxado</div>
+            </div>
+            <div class="diary-debrief">
+              <strong>Debrief:</strong> WhatsApp domina coordenação prática/social; TikTok e Instagram dominam entretenimento e identidade. O contato de desconhecido do Dia 4 foi normalizado e não relatado a nenhum adulto — bate com o achado da TIC Kids Online sobre subnotificação.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Journey Maps -->
+      <section class="case-section">
+        <h2>Journey Maps</h2>
+        <p class="section-intro">Cada journey map detalha o episódio mais revelador do diário de cada persona, em 5 etapas.</p>
+
+        <div class="journey-map-block">
+          <h4>Camila — Decisão de compra de um sérum facial</h4>
+          <div class="episodio">Episódio mapeado a partir dos Dias 3-4 do diário</div>
+          <table class="journey-table">
+            <thead>
+              <tr><th>Etapa</th><th>Ação</th><th>Emoção</th><th>Ponto de dor</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>1. Gatilho</strong></td><td>Vê anúncio patrocinado nos stories de uma amiga</td><td>Curiosidade, leve ceticismo</td><td>Desconfiança inicial de conteúdo patrocinado</td></tr>
+              <tr><td><strong>2. Exploração</strong></td><td>Salva o post; volta no dia seguinte para ler comentários</td><td>Curiosidade mantida</td><td>Precisa voltar ativamente — sem lembrete, poderia esquecer</td></tr>
+              <tr><td><strong>3. Avaliação</strong></td><td>Encontra comentário de uma conhecida recomendando</td><td>Confiança aumenta rapidamente</td><td>Decisão depende quase inteiramente de prova social por conhecido</td></tr>
+              <tr><td><strong>4. Decisão</strong></td><td>Compra pelo link na bio do post</td><td>Satisfação, decisão segura</td><td>Checkout pelo link da bio não testado em detalhe</td></tr>
+              <tr><td><strong>5. Pós-decisão</strong></td><td>Sem registro de compartilhamento da compra</td><td>Satisfeita no momento</td><td>Sem dado sobre satisfação pós-uso — diário não cobriu esse período</td></tr>
+            </tbody>
+          </table>
+          <div class="journey-reading">O ponto de maior alavancagem é a <strong>etapa de avaliação</strong>: a decisão não foi motivada pela qualidade do anúncio, e sim por um comentário de terceiros — prova social por pares pesa mais que o anúncio pago em si.</div>
+        </div>
+
+        <div class="journey-map-block">
+          <h4>Théo — Participação em um trend do TikTok</h4>
+          <div class="episodio">Episódio mapeado a partir dos Dias 1-2 do diário</div>
+          <table class="journey-table">
+            <thead>
+              <tr><th>Etapa</th><th>Ação</th><th>Emoção</th><th>Ponto de dor</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>1. Gatilho</strong></td><td>Vê um trend novo no feed, após a escola</td><td>Diversão, animação</td><td>—</td></tr>
+              <tr><td><strong>2. Exploração</strong></td><td>Decide participar direto, sem pesquisar mais</td><td>Empolgação</td><td>Decisão pouco refletida</td></tr>
+              <tr><td><strong>3. Avaliação</strong></td><td>Etapa quase ausente — sem comparação com alternativas</td><td>Mínima</td><td>Jornada mais rápida e menos deliberativa que frameworks tradicionais assumem</td></tr>
+              <tr><td><strong>4. Decisão</strong></td><td>Grava e posta o vídeo, compartilha no grupo de amigos</td><td>Ansiedade misturada com expectativa</td><td>Decisão ligada à expectativa de validação social futura</td></tr>
+              <tr><td><strong>5. Pós-decisão</strong></td><td>Checa curtidas/comentários repetidamente à noite</td><td>Ansiedade leve, alívio com reação positiva</td><td>Padrão de checagem compulsiva — ponto de atenção para bem-estar</td></tr>
+            </tbody>
+          </table>
+          <div class="journey-reading">Jornada <strong>mais curta e mais emocional</strong> que a de Camila: o gatilho já carrega quase toda a motivação, e o verdadeiro momento de tensão não é decidir participar, e sim esperar pela validação social depois.</div>
+        </div>
+      </section>
+
+      <!-- Achados Principais -->
+      <section class="case-section">
+        <h2>Insight Statements</h2>
+        <p class="section-intro">Síntese completa dos 6 insights identificados, cada um com nível de confiança declarado conforme a robustez do apoio em dado real vs. artefato simulado.</p>
+
+        <div class="highlight-card">
+          <h4>Insight mais importante para o portfólio</h4>
+          <p>O "funil de decisão" não é o mesmo formato para as duas gerações — o que justifica metodologicamente por que a próxima etapa do portfólio (Pesquisa Avaliativa) testa hipóteses de design com usuários reais em vez de assumir uma arquitetura única para públicos diferentes.</p>
+        </div>
+
+        <div class="insight-list">
+          <div class="insight-item">
+            <div class="insight-item-header">
+              <span class="insight-code">IS1 — Funil de decisão diferente entre gerações</span>
+              <span class="confidence-badge confidence-media">Confiança média</span>
+            </div>
+            <p>A jornada da Millennial tem uma etapa de avaliação deliberada (busca por prova social racionalizada). A jornada do adolescente é mais curta e emocional, com a decisão quase tomada já no gatilho.</p>
+          </div>
+          <div class="insight-item">
+            <div class="insight-item-header">
+              <span class="insight-code">IS2 — Prova social por conhecido pesa mais que anúncio</span>
+              <span class="confidence-badge confidence-media">Confiança média-alta</span>
+            </div>
+            <p>Para Millennials, coerente com o dado de que ~58% confiam mais em recomendações/IA do que em anúncios diretos (mLabs/Conversion).</p>
+          </div>
+          <div class="insight-item">
+            <div class="insight-item-header">
+              <span class="insight-code">IS3 — Tensão emocional é pós-decisão para o adolescente</span>
+              <span class="confidence-badge confidence-baixa">Confiança baixa-média</span>
+            </div>
+            <p>A ansiedade de checagem de curtidas/comentários depois de postar supera, em intensidade, a decisão de participar do trend em si.</p>
+          </div>
+          <div class="insight-item">
+            <div class="insight-item-header">
+              <span class="insight-code">IS4 — Contato com desconhecidos é normalizado e subnotificado</span>
+              <span class="confidence-badge confidence-media">Confiança média-alta</span>
+            </div>
+            <p>Coerente com a TIC Kids Online Brasil 2025 (30% dos 9-17 anos tiveram esse tipo de contato), com divergência entre autopercepção do adolescente e percepção dos responsáveis.</p>
+          </div>
+          <div class="insight-item">
+            <div class="insight-item-header">
+              <span class="insight-code">IS5 — "Decisão de compra" pode não ser eixo válido entre gerações</span>
+              <span class="confidence-badge confidence-alta">Confiança alta (metodológica)</span>
+            </div>
+            <p>Nenhuma pesquisa brasileira mede compra por rede social para 13-17 anos; os artefatos simulados reforçam que a "decisão" natural do adolescente é sobre participação/identidade, não consumo.</p>
+          </div>
+          <div class="insight-item">
+            <div class="insight-item-header">
+              <span class="insight-code">IS6 — Uso "no piloto automático" em contextos diferentes</span>
+              <span class="confidence-badge confidence-baixa">Confiança baixa</span>
+            </div>
+            <p>Na Millennial aparece à noite, como hábito de desligar. No adolescente aparece como multitasking simultâneo entre duas plataformas, não como momento isolado.</p>
+          </div>
+        </div>
       </section>
 
       <!-- Por que importa -->
       <section class="case-section">
         <h2>Por que Importa</h2>
-        <p>Esta pesquisa generativa bem executada previne que a próxima etapa (teste de usabilidade e avaliação de conceitos) parta de uma suposição errada sobre como públicos diferentes tomam decisões. O insight 5 em particular — descobrir que "decisão de compra" não é um eixo válido para adolescentes — seria fácil de passar despercebido sem uma exploração generativa profunda. Isso demonstra o valor real de uma pesquisa generativa em uma trajetória de UX: entender as motivações certas antes de validar soluções.</p>
+        <p>Esta pesquisa generativa bem executada previne que a próxima etapa (teste de usabilidade e avaliação de conceitos) parta de uma suposição errada sobre como públicos diferentes tomam decisões. O IS5 em particular — descobrir que "decisão de compra" não é um eixo válido para adolescentes — seria fácil de passar despercebido sem uma exploração generativa profunda. Isso demonstra o valor real de uma pesquisa generativa em uma trajetória de UX: entender as motivações certas antes de validar soluções.</p>
       </section>
 
       <!-- Documentação -->
@@ -328,7 +803,7 @@
           <li><a href="../pesquisas/01-pesquisa-generativa/docs/protocolo-pesquisa-generativa.md" target="_blank">Protocolo Completo da Pesquisa</a></li>
           <li><a href="../pesquisas/01-pesquisa-generativa/docs/personas/" target="_blank">Personas (Millennial e Geração Alpha)</a></li>
           <li><a href="../pesquisas/01-pesquisa-generativa/docs/journey-maps/" target="_blank">Journey Maps Detalhados</a></li>
-          <li><a href="../pesquisas/01-pesquisa-generativa/docs/diary-study/" target="_blank">Entradas do Diary Study</a></li>
+          <li><a href="../pesquisas/01-pesquisa-generativa/docs/diary-study/" target="_blank">Entradas Completas do Diary Study</a></li>
           <li><a href="../pesquisas/01-pesquisa-generativa/docs/insights/sintese-insights.md" target="_blank">Síntese de Insights</a></li>
           <li><a href="../pesquisas/01-pesquisa-generativa/data/fontes-secundarias.md" target="_blank">Fontes Secundárias Citadas</a></li>
         </ul>
