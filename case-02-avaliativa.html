@@ -229,6 +229,43 @@
       color: var(--color-muted);
     }
 
+    /* Referências metodológicas */
+    .method-refs {
+      background: var(--color-surface-soft);
+      border-left: 3px solid var(--color-brand-teal);
+      border-radius: var(--radius-md);
+      padding: var(--space-md) var(--space-lg);
+      margin-top: var(--space-lg);
+    }
+    .method-refs h4 {
+      margin: 0 0 var(--space-sm) 0;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-muted);
+    }
+    .method-refs ol {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 13px;
+      color: var(--color-muted);
+      line-height: 1.6;
+    }
+    .method-refs li {
+      margin-bottom: var(--space-xs);
+    }
+    .method-refs li:last-child {
+      margin-bottom: 0;
+    }
+    .method-refs a {
+      color: var(--color-body);
+      text-decoration: underline;
+    }
+    .method-refs a:hover {
+      color: var(--color-brand-teal);
+    }
+
     /* Stats grid (dados de mercado) */
     .stats-grid {
       display: grid;
@@ -534,6 +571,14 @@
             <strong>Prototipagem</strong>
             <p>Protótipo clicável HTML/CSS/JS, autocontido, sem dependências externas</p>
           </div>
+        </div>
+        <div class="method-refs">
+          <h4>Fundamentação metodológica</h4>
+          <ol>
+            <li>Nielsen, J. &amp; Landauer, T. K. (1993). <a href="https://dl.acm.org/doi/10.1145/169059.169166" target="_blank" rel="noopener">A mathematical model of the finding of usability problems</a>. <em>Proc. INTERCHI '93</em>, 206-213 — modela a descoberta de problemas como processo de Poisson e é a origem da amostra de 5 participantes adotada no protocolo desta pesquisa.</li>
+            <li>Nielsen Norman Group. <a href="https://www.nngroup.com/articles/why-you-only-need-to-test-with-5-users/" target="_blank" rel="noopener">Why You Only Need to Test with 5 Users</a> — leitura aplicada do modelo acima, que sustenta a escolha de 5 participantes por grupo em vez de uma amostra maior.</li>
+            <li>Spencer, D. — autora do termo <em>tree testing</em>, formalizado como método pela Optimal Workshop. <a href="https://www.optimalworkshop.com/101-guides/information-architecture-101/tree-testing-and-information-architecture" target="_blank" rel="noopener">Tree testing and information architecture</a> — base das métricas de <em>success rate</em> e <em>directness</em> reportadas aqui.</li>
+          </ol>
         </div>
       </section>
 
