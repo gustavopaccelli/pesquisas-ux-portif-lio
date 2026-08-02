@@ -61,6 +61,90 @@
       flex-wrap: wrap;
     }
 
+    /* Feature cards section */
+    .feature-cards-section {
+      padding: var(--space-section) var(--space-lg);
+      background: var(--color-canvas);
+    }
+    .feature-cards-section .container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .feature-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: var(--space-lg);
+    }
+    /* Wrapper <a>: só comportamento de link/hover, sem cor — evita colidir
+       em especificidade com as variantes de cor abaixo, que ficam isoladas
+       no elemento .feature-card. */
+    .feature-card-link {
+      display: block;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+      border-radius: var(--radius-xl);
+    }
+    .feature-card-link:hover {
+      transform: translateY(-4px);
+    }
+    .feature-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 280px;
+    }
+    .feature-card-content .badge-pill {
+      background: rgba(255, 255, 255, 0.16);
+      color: inherit;
+      margin: 0 0 var(--space-md) 0;
+    }
+    .feature-card-content h2 {
+      margin: 0 0 var(--space-sm) 0;
+      font-size: 24px;
+      font-weight: 600;
+    }
+    .feature-card-content p {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    .feature-card-stat {
+      margin-top: var(--space-lg);
+      padding-top: var(--space-md);
+      border-top: 1px solid rgba(255, 255, 255, 0.25);
+    }
+    .feature-card-stat strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+    .feature-card-stat span {
+      font-size: 13px;
+      opacity: 0.85;
+    }
+    .feature-card-cta {
+      display: block;
+      margin-top: var(--space-md);
+      font-size: 14px;
+      font-weight: 600;
+    }
+    /* Correção de contraste: o par marca "pink + branco" fica abaixo de 4.5:1
+       para texto de corpo (~3.1:1) — texto de tinta escura sobre o rosa
+       mantém > 6:1 e preserva o mesmo token de fundo usado nas outras páginas. */
+    .feature-card-pink .feature-card-content,
+    .feature-card-pink .feature-card-stat {
+      color: var(--color-ink);
+    }
+    .feature-card-pink .feature-card-content .badge-pill {
+      background: rgba(10, 10, 10, 0.08);
+    }
+    .feature-card-pink .feature-card-stat {
+      border-top-color: rgba(10, 10, 10, 0.18);
+    }
+
     /* CTA section */
     .cta-section {
       padding: var(--space-section) var(--space-lg);
@@ -109,6 +193,9 @@
       .hero h1 {
         font-size: 32px;
       }
+      .feature-cards-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -135,6 +222,61 @@
       <div class="actions">
         <a href="pesquisas.html" class="btn btn-primary">Ver as 3 pesquisas</a>
         <a href="sobre.html" class="btn btn-secondary">Sobre mim</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature Cards -->
+  <section class="feature-cards-section" id="pesquisas">
+    <div class="container">
+      <div class="feature-cards-grid">
+        <!-- Pesquisa 1 -->
+        <a href="case-01-generativa.html" class="feature-card-link">
+          <div class="feature-card feature-card-pink feature-card-content">
+            <div>
+              <span class="badge-pill">Discovery · Diary Study + Journey Mapping</span>
+              <h2>Comportamento em Redes Sociais</h2>
+              <p>Millennials vs. Geração Alpha — diário de uso e mapeamento de jornada, triangulados com dados de mercado reais (TIC Kids Online Brasil, mLabs).</p>
+            </div>
+            <div class="feature-card-stat">
+              <strong>6 insight statements</strong>
+              <span>documentados e classificados por nível de confiança</span>
+            </div>
+            <span class="feature-card-cta">Ver pesquisa completa →</span>
+          </div>
+        </a>
+
+        <!-- Pesquisa 2 -->
+        <a href="case-02-avaliativa.html" class="feature-card-link">
+          <div class="feature-card feature-card-teal feature-card-content">
+            <div>
+              <span class="badge-pill">Validação · Teste de Usabilidade + Tree Testing</span>
+              <h2>Plataforma de Vagas "VagaCerta"</h2>
+              <p>Teste moderado com dois grupos etários e tree testing estrutural — identificação de uma fricção real no fluxo de candidatura.</p>
+            </div>
+            <div class="feature-card-stat">
+              <strong>94% de sucesso</strong>
+              <span>na tarefa mais complexa do teste de usabilidade</span>
+            </div>
+            <span class="feature-card-cta">Ver pesquisa completa →</span>
+          </div>
+        </a>
+
+        <!-- Pesquisa 3 -->
+        <a href="case-03-quantitativa.html" class="feature-card-link">
+          <div class="feature-card feature-card-ochre feature-card-content">
+            <div>
+              <span class="badge-pill">Quantitativo · Análise de Avaliações + SUS</span>
+              <h2>App de Delivery (iFood)</h2>
+              <p>Codificação de avaliações reais da loja de aplicativos e painel SUS simulado, para medir usabilidade percebida vs. confiança.</p>
+            </div>
+            <div class="feature-card-stat">
+              <strong>76,25 SUS score</strong>
+              <span>acima do benchmark de mercado de ~68 pontos</span>
+            </div>
+            <span class="feature-card-cta">Ver pesquisa completa →</span>
+          </div>
+        </a>
       </div>
     </div>
   </section>
