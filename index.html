@@ -61,75 +61,6 @@
       flex-wrap: wrap;
     }
 
-    /* Stats bar */
-    .stats-bar {
-      padding: var(--space-xl) var(--space-lg) var(--space-section);
-      background: var(--color-canvas);
-    }
-    .stats-bar .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-lg);
-    }
-    .stat-item {
-      text-align: center;
-      padding: var(--space-lg) var(--space-md);
-      border-radius: var(--radius-lg);
-      background: var(--color-surface-soft);
-    }
-    .stat-item .stat-number {
-      font-family: var(--font-display);
-      font-size: 40px;
-      font-weight: 500;
-      letter-spacing: -1px;
-      color: var(--color-ink);
-      margin: 0 0 var(--space-xs) 0;
-    }
-    .stat-item .stat-label {
-      font-size: 14px;
-      color: var(--color-body);
-      line-height: 1.4;
-      margin: 0;
-    }
-
-    /* Sobre section */
-    .about-section {
-      padding: var(--space-section) var(--space-lg);
-      background: var(--color-surface-soft);
-    }
-    .about-section .container {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: var(--space-xxl);
-      align-items: start;
-    }
-    .about-bio p {
-      color: var(--color-body);
-      font-size: 16px;
-      line-height: 1.7;
-      margin: 0 0 var(--space-md) 0;
-    }
-    .about-bio p:last-child { margin-bottom: 0; }
-    .about-bio strong { color: var(--color-ink); }
-    .about-skills h3 {
-      font-family: var(--font-body);
-      font-size: 14px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--color-muted);
-      margin: 0 0 var(--space-md) 0;
-    }
-    .about-skills .badge-pill {
-      margin: 0 var(--space-xs) var(--space-xs) 0;
-    }
-
     /* Feature cards section */
     .feature-cards-section {
       padding: var(--space-section) var(--space-lg);
@@ -335,78 +266,6 @@
       line-height: 1.6;
     }
 
-    /* Formação section */
-    .formation-section {
-      padding: var(--space-section) var(--space-lg);
-      background: var(--color-canvas);
-    }
-    .formation-section .container {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .formation-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      flex-wrap: wrap;
-      gap: var(--space-md);
-      margin-bottom: var(--space-xl);
-    }
-    .formation-header h2 { margin: 0; }
-    .formation-header p {
-      margin: var(--space-xs) 0 0 0;
-      color: var(--color-body);
-      font-size: 15px;
-    }
-    .formation-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: var(--space-lg);
-    }
-    .formation-group h3 {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--color-ink);
-      margin: 0 0 var(--space-sm) 0;
-    }
-    .formation-group ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-    .formation-group li {
-      font-size: 14px;
-      color: var(--color-body);
-      line-height: 1.6;
-      padding-left: var(--space-md);
-      position: relative;
-    }
-    .formation-group li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 10px;
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: var(--color-muted-soft);
-    }
-    .formation-footnote {
-      margin-top: var(--space-xl);
-      padding-top: var(--space-lg);
-      border-top: 1px solid var(--color-hairline);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: var(--space-md);
-    }
-    .formation-footnote p {
-      margin: 0;
-      font-size: 14px;
-      color: var(--color-muted);
-    }
-
     /* CTA section */
     .cta-section {
       padding: var(--space-section) var(--space-lg);
@@ -455,13 +314,6 @@
       .hero h1 {
         font-size: 32px;
       }
-      .stats-bar .container {
-        grid-template-columns: 1fr;
-      }
-      .about-grid {
-        grid-template-columns: 1fr;
-        gap: var(--space-xl);
-      }
       .feature-cards-grid {
         grid-template-columns: 1fr;
       }
@@ -474,9 +326,9 @@
     <div class="container">
       <a href="index.html" class="logo">UX Research</a>
       <div class="nav-links">
-        <a href="#sobre">Sobre</a>
+        <a href="sobre.html">Sobre</a>
         <a href="#pesquisas">Pesquisas</a>
-        <a href="#formacao">Formação</a>
+        <a href="sobre.html#formacao">Formação</a>
         <a href="#contato">Contato</a>
       </div>
     </div>
@@ -487,69 +339,10 @@
     <div class="container">
       <span class="caption-uppercase">Portfólio de UX Research</span>
       <h1 class="display-lg">Rigor de pesquisa acadêmica aplicado ao comportamento do usuário</h1>
-      <p>Sou Gustavo Paccelli, doutor em Ciências Sociais pela UFJF em transição para UX Research. Depois de mais de dez anos entrevistando pessoas, analisando dados e investigando comportamento coletivo para a academia, apliquei o mesmo método a três pesquisas de UX completas — da pergunta de descoberta ao dado quantitativo.</p>
+      <p>Este site reúne pesquisas de UX Research de Gustavo Paccelli — três cases completos, do discovery à medição quantitativa.</p>
       <div class="actions">
         <a href="#pesquisas" class="btn btn-primary">Ver as 3 pesquisas</a>
-        <a href="#sobre" class="btn btn-secondary">Minha trajetória</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Stats bar -->
-  <section class="stats-bar">
-    <div class="container">
-      <div class="stat-item">
-        <p class="stat-number">3</p>
-        <p class="stat-label">métodos aplicados ponta a ponta — generativo, avaliativo e quantitativo</p>
-      </div>
-      <div class="stat-item">
-        <p class="stat-number">76,25</p>
-        <p class="stat-label">SUS score médio simulado, acima do benchmark de mercado (Bangor et al., ~68)</p>
-      </div>
-      <div class="stat-item">
-        <p class="stat-number">6</p>
-        <p class="stat-label">insight statements triangulados com dados secundários reais</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Sobre -->
-  <section class="about-section" id="sobre">
-    <div class="container">
-      <div class="about-grid">
-        <div class="about-bio reveal">
-          <h2 class="display-sm">Da pesquisa acadêmica para o UX Research</h2>
-          <p>
-            Sou <strong>doutor em Ciências Sociais pela Universidade Federal de Juiz de Fora (UFJF, 2024)</strong>,
-            com mais de uma década de pesquisa sobre comportamento coletivo, democracia e participação —
-            entrevistas em profundidade, análise qualitativa de dados, etnografia e análise de conteúdo,
-            além de análise de dados com R.
-          </p>
-          <p>
-            Nos últimos anos venho migrando esse repertório para UX Research: formação específica em
-            pesquisa de experiência do usuário (Alura, EBAC, Google, Awari) e três pesquisas de portfólio
-            construídas ponta a ponta — da pesquisa generativa ao teste quantitativo — para demonstrar,
-            com artefatos reais, como aplico esse método a produtos digitais.
-          </p>
-          <p>
-            Este portfólio existe para isso: protocolos, personas, journey maps e resultados de teste
-            abertos para consulta — não apenas a afirmação de que sei fazer pesquisa, mas o processo
-            completo, documentado.
-          </p>
-        </div>
-        <div class="about-skills reveal">
-          <h3>Habilidades transferíveis</h3>
-          <div>
-            <span class="badge-pill">Entrevista em profundidade</span>
-            <span class="badge-pill">Análise qualitativa</span>
-            <span class="badge-pill">Etnografia</span>
-            <span class="badge-pill">Análise de conteúdo</span>
-            <span class="badge-pill">Triangulação de dados</span>
-            <span class="badge-pill">Análise de redes sociais</span>
-            <span class="badge-pill">Programação em R</span>
-            <span class="badge-pill">Síntese para não especialistas</span>
-          </div>
-        </div>
+        <a href="sobre.html" class="btn btn-secondary">Sobre mim</a>
       </div>
     </div>
   </section>
@@ -683,61 +476,6 @@
 
       </div>
       <p class="methodology-note"><strong>Nota sobre a natureza dos dados:</strong> os dados secundários de mercado e as avaliações de aplicativo analisadas são reais, públicos e citados. Os artefatos de campo (entradas de diário, sessões de teste e painel SUS) são simulados — o escopo deste portfólio não inclui recrutamento de participantes. Cada página de case declara explicitamente o que é real e o que é simulado.</p>
-    </div>
-  </section>
-
-  <!-- Formação em UX Research -->
-  <section class="formation-section" id="formacao">
-    <div class="container">
-      <div class="formation-header">
-        <div>
-          <h2 class="display-sm">Formação em UX Research</h2>
-          <p>17 cursos · 120h+ de formação específica, além do doutorado em métodos de pesquisa</p>
-        </div>
-      </div>
-      <div class="formation-grid">
-        <div class="formation-group">
-          <h3>Pesquisa &amp; Métodos</h3>
-          <ul>
-            <li>UX Research: Entrevistas com Usuários</li>
-            <li>UX Research: Entrevistas com Equipes Internas</li>
-            <li>UX Research: Pesquisa Etnográfica</li>
-            <li>UX Research: Avaliação Heurística</li>
-            <li>UX Research: Análise de Concorrentes</li>
-            <li>UX Research: Mapeando a Jornada do Usuário</li>
-            <li>Prática de Pesquisa da Experiência do Usuário (EBAC)</li>
-          </ul>
-        </div>
-        <div class="formation-group">
-          <h3>Testes &amp; Validação</h3>
-          <ul>
-            <li>Teste de Usabilidade — Parte 1: seu produto é fácil de usar</li>
-            <li>Teste de Usabilidade — Parte 2: mensurando e entregando resultados</li>
-            <li>UX Produto: Monitore, Mensure e Teste seu Projeto</li>
-          </ul>
-        </div>
-        <div class="formation-group">
-          <h3>Dados &amp; Otimização</h3>
-          <ul>
-            <li>UX Research: Análise de Sites com Google Analytics (Google)</li>
-            <li>UX Research: Otimização de Sites</li>
-            <li>UX Design: Dashboards com Data Studio</li>
-          </ul>
-        </div>
-        <div class="formation-group">
-          <h3>Conteúdo &amp; Acessibilidade</h3>
-          <ul>
-            <li>UX Writing</li>
-            <li>UX Writing: Escrevendo Textos para Usuários</li>
-            <li>UX Acessível: Projetando Interfaces Inclusivas</li>
-            <li>UX: Entenda a Experiência de Usuário</li>
-          </ul>
-        </div>
-      </div>
-      <div class="formation-footnote">
-        <p>Cursos por Alura, EBAC, Google e Awari, entre 2022 e 2024.</p>
-        <a href="https://gustavopaccelli.github.io/gustavopaccelli/certificates.html" class="text-link" target="_blank" rel="noopener">Ver todos os certificados (60+) →</a>
-      </div>
     </div>
   </section>
 
